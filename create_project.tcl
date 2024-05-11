@@ -1,8 +1,9 @@
 # Typical usage: vivado -mode tcl -source create_project.tcl
 
-$target_dir = "vivado"
+set target_dir "./vivado"
+set project_name "FPGA-project"
 
-create_project -force $target_dir ./$target_dir -part xc7k160tffg676-2L
+create_project -force $project_name $target_dir -part xc7k160tffg676-2L
 
 # Add sources
 add_files -fileset sources_1 ./rtl
