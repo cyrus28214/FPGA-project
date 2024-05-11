@@ -11,7 +11,7 @@ module top(CLK_200M_P, vga_hs, vga_vs, vga_red, vga_green, vga_blue);
     );
 
     vga vga_inst(
-        .clk(CLK_200M_P),
+        .clk(vga_clk),
         .hs(vga_hs),
         .vs(vga_vs),
         .r(vga_red),
