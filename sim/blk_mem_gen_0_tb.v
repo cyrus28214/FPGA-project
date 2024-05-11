@@ -3,7 +3,7 @@
 module blk_mem_gen_0_tb;
   reg         clka = 0;
   reg  [3:0]  addra = 4'd0;
-  wire [31:0] douta;
+  wire [15:0] douta;
   
   always #10 clka = ~clka;
 
@@ -11,7 +11,7 @@ module blk_mem_gen_0_tb;
     addra <= addra + 4'd1;
   end
 
-  blk_mem_gen_0_tb dut(
+  blk_mem_gen_0 dut(
     .clka(clka),
     .addra(addra),
     .douta(douta)
