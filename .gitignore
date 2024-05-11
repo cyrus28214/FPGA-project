@@ -1,2 +1,6 @@
 /local
-/vivado
+/vivado*
+/.Xil
+/*.str
+/*.jou
+/*.log
