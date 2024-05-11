@@ -19,3 +19,7 @@ vivado -mode tcl -source create_project.tcl
 [Vivado Design Suite Tcl Command Reference Guide](https://docs.amd.com/r/en-US/ug835-vivado-tcl-commands)
 
 [SWORD 4.0 xdc约束文件](http://www.sword.org.cn/sites/default/files/SWORD4.xdc)
+
+[CSDN: FPGA实战（五）时钟IP核（MMCM PLL）](https://blog.csdn.net/weixin_51944426/article/details/120225274)
+
+[[野火]FPGA Verilog开发实战指南](https://doc.embedfire.com/fpga/altera/ep4ce10_pro/zh/latest)
