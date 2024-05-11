@@ -32,4 +32,12 @@ set_property -dict [list \
   CONFIG.USE_RESET {false} \
 ] [get_ips clk_wiz_0]
 
+create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name blk_mem_gen_0
+set_property -dict [list \
+  CONFIG.Coe_File {./rom/rom.coe} \
+  CONFIG.Enable_A {Always_Enabled} \
+  CONFIG.Load_Init_File {true} \
+  CONFIG.Memory_Type {Single_Port_ROM} \
+] [get_ips blk_mem_gen_0]
+
 start_gui
