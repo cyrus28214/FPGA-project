@@ -1,5 +1,7 @@
 # Typical usage: vivado -mode tcl -source create_project.tcl
 
+# 使用[file normalize <相对路径>]可以将路径转换为绝对路径，这样你就可以在脚本里使用相对路径，方便其他人也能运行脚本
+
 set target_dir "./vivado"
 set project_name "FPGA-project"
 
@@ -32,11 +34,9 @@ set_property -dict [list \
   CONFIG.USE_RESET {false} \
 ] [get_ips clk_wiz_0]
 
-# 请使用相对路径，便于其他人使用，file normalize用于将路径转换为绝对路径，其他地方也一样
-set coeFile [file normalize ./rom/rom.coe]
 create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name blk_mem_gen_0
 set_property -dict [list \
-  CONFIG.Coe_File $coeFile \
+  CONFIG.Coe_File [file normalize ./rom/rom.coe] \
   CONFIG.Enable_A {Always_Enabled} \
   CONFIG.Load_Init_File {true} \
   CONFIG.Memory_Type {Single_Port_ROM} \
