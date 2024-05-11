@@ -15,5 +15,5 @@ module blk_mem_gen_0_tb;
     .clka(clka),
     .addra(addra),
     .douta(douta)
-  )
+  );
 endmodule
