@@ -13,3 +13,5 @@ vivado -mode tcl -source create_project.tcl
 每次在Vivado中创建新的资源时，请从Tcl Console中拷贝创建资源的命令，并在create_project.tcl中添加到相应位置。
 
 每次pull时，可以手动查看tcl脚本里的更改，并在Vivado中的Tcl Console中运行。
+
+另参见：[Vivado Design Suite Tcl Command Reference Guide](https://docs.amd.com/r/en-US/ug835-vivado-tcl-commands)
