@@ -14,4 +14,8 @@ vivado -mode tcl -source create_project.tcl
 
 每次pull时，可以手动查看tcl脚本里的更改，并在Vivado中的Tcl Console中运行。
 
-另参见：[Vivado Design Suite Tcl Command Reference Guide](https://docs.amd.com/r/en-US/ug835-vivado-tcl-commands)
+## 参考资料
+
+[Vivado Design Suite Tcl Command Reference Guide](https://docs.amd.com/r/en-US/ug835-vivado-tcl-commands)
+
+[SWORD 4.0 xdc约束文件](http://www.sword.org.cn/sites/default/files/SWORD4.xdc)

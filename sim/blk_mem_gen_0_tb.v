@@ -1,5 +1,6 @@
 `timescale 1ns/1ps
 
+//当前上升沿传入的地址，要在下一个上升沿才能拿到数据，请注意
 module blk_mem_gen_0_tb;
   reg         clka = 0;
   reg  [3:0]  addra = 4'd0;
@@ -7,8 +8,11 @@ module blk_mem_gen_0_tb;
   
   always #10 clka = ~clka;
 
+  reg [7:0] cnt = 0;
+
   always @(posedge clka) begin
-    addra <= addra + 4'd1;
+    cnt <= cnt + 1;
+    addra <= cnt[7:4];
   end
 
   blk_mem_gen_0 dut(
