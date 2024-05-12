@@ -15,6 +15,7 @@ update_compile_order -fileset sources_1
 update_compile_order -fileset sim_1
 
 # Add IPs
+# Clock wizard: 200MHz to 25.175MHz
 create_ip -name clk_wiz -vendor xilinx.com -library ip -version 6.0 -module_name clk_wiz_0
 set_property -dict [list \
   CONFIG.CLKIN1_JITTER_PS {50.0} \
@@ -33,6 +34,7 @@ set_property -dict [list \
   CONFIG.USE_RESET {false} \
 ] [get_ips clk_wiz_0]
 
+# Sing Port ROM
 create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name blk_mem_gen_0
 set_property -dict [list \
   CONFIG.Coe_File [file normalize ./rom/rom.coe] \
@@ -40,5 +42,13 @@ set_property -dict [list \
   CONFIG.Load_Init_File {true} \
   CONFIG.Memory_Type {Single_Port_ROM} \
 ] [get_ips blk_mem_gen_0]
+
+# Simple Dual Port RAM
+create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name blk_mem_gen_1
+set_property -dict [list \
+  CONFIG.Enable_A {Always_Enabled} \
+  CONFIG.Enable_B {Always_Enabled} \
+  CONFIG.Memory_Type {Simple_Dual_Port_RAM} \
+] [get_ips blk_mem_gen_1]
 
 start_gui
