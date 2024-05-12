@@ -11,7 +11,6 @@ create_project -force $project_name $target_dir -part xc7k160tffg676-2L
 add_files -scan_for_includes -fileset sources_1 ./rtl
 add_files -scan_for_includes -fileset sim_1 ./sim
 add_files -scan_for_includes -fileset constrs_1 ./constraints
-import_files -force
 update_compile_order -fileset sources_1
 update_compile_order -fileset sim_1
 
