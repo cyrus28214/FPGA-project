@@ -10,5 +10,5 @@ module clk_div_vga_tb;
       .clk_out(clk_out)
   );
 
-  always #2.5 clk_in = ~clk_in;
+  always #5 clk_in = ~clk_in;
 endmodule
