@@ -15,8 +15,8 @@ update_compile_order -fileset sources_1
 update_compile_order -fileset sim_1
 
 # Add IPs
-# Clock wizard: 200MHz to 25.175MHz
-create_ip -name clk_wiz -vendor xilinx.com -library ip -version 6.0 -module_name clk_wiz_0
+# Clock wizard: 100MHz to 25.175MHz
+create_ip -name clk_wiz -vendor xilinx.com -library ip -version 6.0 -module_name clk_div_vga
 set_property -dict [list \
   CONFIG.CLKIN1_JITTER_PS {50.0} \
   CONFIG.CLKOUT1_JITTER {238.195} \
@@ -29,10 +29,10 @@ set_property -dict [list \
   CONFIG.MMCM_CLKOUT0_DIVIDE_F {43.125} \
   CONFIG.MMCM_DIVCLK_DIVIDE {7} \
   CONFIG.PRIMARY_PORT {clk_in} \
-  CONFIG.PRIM_IN_FREQ {200.000} \
+  CONFIG.PRIM_IN_FREQ {100.000} \
   CONFIG.USE_LOCKED {false} \
   CONFIG.USE_RESET {false} \
-] [get_ips clk_wiz_0]
+] [get_ips clk_div_vga]
 
 # Sing Port ROM
 create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name blk_mem_gen_0
