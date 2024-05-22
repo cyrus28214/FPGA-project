@@ -43,7 +43,8 @@ set_property -dict [list \
 ] [get_ips blk_mem_gen_0]
 
 # Simple Dual Port RAM
-# 延迟：两个时钟周期，第一个上升沿读取addra，第二个上升沿开始输出douta，第三个上升沿结束输出douta。
+# 读延迟：两个时钟周期，第一拍设置addr，第三拍才能获得输出。
+# 写延迟：一个时钟周期。
 create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name bRAM
 set_property -dict [list \
   CONFIG.Enable_A {Always_Enabled} \
