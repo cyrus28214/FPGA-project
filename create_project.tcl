@@ -47,6 +47,8 @@ set_property -dict [list \
 create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name bRAM
 set_property -dict [list \
   CONFIG.Enable_A {Always_Enabled} \
+  CONFIG.Write_Width_A {16} \
+  CONFIG.Write_Depth_A {524288} \
   CONFIG.Enable_B {Always_Enabled} \
   CONFIG.Memory_Type {Simple_Dual_Port_RAM} \
 ] [get_ips bRAM]
