@@ -16,6 +16,13 @@ update_compile_order -fileset sim_1
 
 # Add IPs
 # Clock wizard: 100MHz to 25.175MHz
+# module clk_div_vga 
+#  (
+#   // Clock out ports
+#   output        clk_out,
+#   // Clock in ports
+#   input         clk_in
+#  );
 create_ip -name clk_wiz -vendor xilinx.com -library ip -version 6.0 -module_name clk_div_vga
 set_property -dict [list \
   CONFIG.CLKIN1_JITTER_PS {50.0} \
