@@ -27,9 +27,15 @@ module vga_ctrl (
   always @(posedge clk or negedge rstn) begin
     if (!rstn) begin
       hcnt <= 0;
-      vcnt <= 0;
     end else begin
       hcnt <= (hcnt == HS_total - 1) ? 0 : hcnt + 1;
+    end
+  end
+
+  always @(posedge clk or negedge rstn) begin
+    if (!rstn) begin
+      vcnt <= 0;
+    end else if (hcnt == HS_total - 1) begin
       vcnt <= (vcnt == VS_total - 1) ? 0 : vcnt + 1;
     end
   end
