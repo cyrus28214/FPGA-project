@@ -22,7 +22,7 @@ module bRAM_tb;
       .doutb(doutb)
   );
 
-  always @(posedge clk) begin
+  always @(negedge clk) begin
     addra <= $random;
     dina  <= $random;
     addrb <= addrb + 1;
