@@ -19,7 +19,7 @@ module vga_ctrl (
   parameter VS_sync = 2;  //Sync
   parameter VS_top = VS_sync + 33;  //Back Porch + Top Border
   parameter VS_video = VS_top + 480;  //Video
-  parameter VS_bottom = VS_bottom + 10;  //Front Porch + Bottom Border
+  parameter VS_bottom = VS_video + 10;  //Front Porch + Bottom Border
   parameter VS_total = 525;  //Total
 
   reg [9:0] hcnt, vcnt;
