@@ -1,6 +1,6 @@
-`timescale 1ns/1ps
+`timescale 1ns / 1ps
 
-module blk_mem_gen_1_tb;
+module bRAM_tb;
   reg         clk = 0;
 
   reg  [ 3:0] addra;
@@ -10,16 +10,16 @@ module blk_mem_gen_1_tb;
   reg  [ 3:0] addrb = 0;
   wire [15:0] doutb;
 
-  always #2.5 clk = ~clk;
-  
-  blk_mem_gen_1 dut(
-    .clka  	(clk),
-    .addra 	(addra),
-    .dina 	(dina),
-    .wea   	(wea),
-    .clkb  	(clk),
-    .addrb 	(addrb),
-    .doutb 	(doutb)
+  always #5 clk = ~clk;
+
+  bRAM dut (
+      .clka (clk),
+      .addra(addra),
+      .dina (dina),
+      .wea  (wea),
+      .clkb (clk),
+      .addrb(addrb),
+      .doutb(doutb)
   );
 
   always @(posedge clk) begin
