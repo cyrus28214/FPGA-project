@@ -2,7 +2,9 @@ module vga_ctrl_tb;
   reg clk = 0;
   reg rstn;
   wire [11:0] pixel = 12'hF00;
-  wire pix_x, pix_y, hs, vs, rgb;
+  wire [9:0] pix_x, pix_y;
+  wire hs, vs;
+  wire [11:0] rgb;
 
   wire vga_clk;
   vga_ctrl dut (
