@@ -2,7 +2,7 @@ module vga_ctrl (
     input wire clk,  //25.172MHz@60Hz
     input wire rstn,
     input wire [11:0] pixel,
-    output wire [9:0] pix_x,  //有效时输出像素坐标
+    output wire [9:0] pix_x,  //有效时输出像素坐标 x=0~643 y=0~479
     output wire [9:0] pix_y,  //无效时输出全一: 10'h3FF
     output wire hs,
     output wire vs,
