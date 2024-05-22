@@ -51,4 +51,6 @@ module vga_ctrl (
   assign pix_y = (pixel_req) ? vcnt + 1 - VS_top : 10'h3FF;
   //请求的像素实际上是下一个时钟的，因此要+1
 
+  assign rgb   = (video_on) ? pixel : 12'h000;
+
 endmodule
