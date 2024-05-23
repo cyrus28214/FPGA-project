@@ -37,10 +37,8 @@ python ./script/image2coe.py ./image/bg.jpg
 
 ## Useful Links
 
-[Vivado Design Suite Tcl Command Reference Guide](https://docs.amd.com/r/en-US/ug835-vivado-tcl-commands)
-
-[SWORD 4.0 xdc 约束文件](http://www.sword.org.cn/sites/default/files/SWORD4.xdc)
-
-[CSDN: FPGA 实战（五）时钟 IP 核（MMCM PLL）](https://blog.csdn.net/weixin_51944426/article/details/120225274)
-
-[[野火]FPGA Verilog 开发实战指南](https://doc.embedfire.com/fpga/altera/ep4ce10_pro/zh/latest)
+- [Vivado Design Suite Tcl Command Reference Guide](https://docs.amd.com/r/en-US/ug835-vivado-tcl-commands)
+- [SWORD 4.0 xdc 约束文件](http://www.sword.org.cn/sites/default/files/SWORD4.xdc)
+- [CSDN: FPGA 实战（五）时钟 IP 核（MMCM PLL）](https://blog.csdn.net/weixin_51944426/article/details/120225274)
+- [[野火]FPGA Verilog 开发实战指南](https://doc.embedfire.com/fpga/altera/ep4ce10_pro/zh/latest)
+- 素材贴图来源：[ckcz123/mota-js](https://github.com/ckcz123/mota-js/tree/master/project)
