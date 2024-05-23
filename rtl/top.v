@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module top (
     input wire clk,  //100MHz
     input wire RSTN,
@@ -9,27 +11,28 @@ module top (
 );
   wire vga_clk;
   wire [11:0] vga_rgb;
-  reg [11:0] pixel;
-  wire [9:0] pix_x;
-  wire [9:0] pix_y;
 
   clk_div_vga clk_div_vga_inst (
       .clk_in (clk),
       .clk_out(vga_clk)
   );
 
-  vga_mem dut (
+  wire [18:0] mem_addr;
+  wire [11:0] mem_data;
+  wire mem_en;
+
+  vga_mem vga_mem_inst (
       .clk(vga_clk),
-      .rstn(rstn),
+      .rstn(RSTN),
       .mem_data(mem_data),
       .mem_addr(mem_addr),
       .mem_en(mem_en),
-      .hs(hs),
-      .vs(vs),
-      .rgb(rgb)
+      .hs(vga_hs),
+      .vs(vga_vs),
+      .rgb(vga_rgb)
   );
 
-  bRAM ram (
+  bRAM ram_inst (
       .clkb (vga_clk),
       .enb  (mem_en),
       .addrb(mem_addr),
@@ -40,4 +43,32 @@ module top (
   assign vga_green = vga_rgb[7:4];
   assign vga_blue  = vga_rgb[3:0];
 
+endmodule
+
+module top_tb;
+  reg clk = 0;
+  reg RSTN;
+  wire vga_hs;
+  wire vga_vs;
+  wire [3:0] vga_red;
+  wire [3:0] vga_green;
+  wire [3:0] vga_blue;
+
+  top top_inst (
+      .clk(clk),
+      .RSTN(RSTN),
+      .vga_hs(vga_hs),
+      .vga_vs(vga_vs),
+      .vga_red(vga_red),
+      .vga_green(vga_green),
+      .vga_blue(vga_blue)
+  );
+
+  always #2.5 clk = ~clk;
+  initial begin
+    clk  = 0;
+    RSTN = 0;
+    #10;
+    RSTN = 1;
+  end
 endmodule

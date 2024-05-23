@@ -1,8 +1,7 @@
 module vga_mem (
     input wire clk,  //25.172MHz@60Hz
     input wire rstn,
-    input wire [11:0] pixel,
-    input wire [15:0] mem_data,
+    input wire [11:0] mem_data,
     output wire mem_en,
     output wire [18:0] mem_addr,
     output wire hs,
@@ -58,8 +57,7 @@ module vga_mem (
 
   assign mem_addr = (pix_y * HS_width + pix_x);
   assign mem_en = pixel_req;
-  assign pixel = mem_data[11:0];
 
-  assign rgb = (video_on) ? pixel : 12'h000;
+  assign rgb = (video_on) ? mem_data[11:0] : 12'h000;
 
 endmodule
