@@ -42,16 +42,16 @@ set_property -dict [list \
   CONFIG.Memory_Type {Single_Port_ROM} \
 ] [get_ips blk_mem_gen_0]
 
-# Siiimple Dual Port RAM
+# True Dual Port RAM
 # 读延迟：两个时钟周期，第一拍设置addr，第三拍才能获得输出。
 # 写延迟：一个时钟周期。
 create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name bRAM
 set_property -dict [list \
-  CONFIG.Enable_A {Always_Enabled} \
   CONFIG.Write_Width_A {16} \
   CONFIG.Write_Depth_A {524288} \
-  CONFIG.Enable_B {Always_Enabled} \
-  CONFIG.Memory_Type {Simple_Dual_Port_RAM} \
+  CONFIG.Write_Width_B {16} \
+  CONFIG.Write_Depth_B {524288} \
+  CONFIG.Memory_Type {True_Dual_Port_RAM} \
 ] [get_ips bRAM]
 
 start_gui
