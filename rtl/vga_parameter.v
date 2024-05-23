@@ -1,11 +1,11 @@
-`define HS_sync 96
-`define HS_left `HS_sync + 40 + 8
-`define HS_video `HS_left + 640
-`define HS_right `HS_video + 16
-`define HS_total 800
+localparam HS_sync = 96;
+localparam HS_left = HS_sync + 40 + 8;
+localparam HS_video = HS_left + 640;
+localparam HS_right = HS_video + 16;
+localparam HS_total = 800;
 
-`define VS_sync 2
-`define VS_top `VS_sync + 25 + 8
-`define VS_video `VS_top + 480
-`define VS_bottom `VS_video + 10
-`define VS_total 525
+localparam VS_sync = 2;
+localparam VS_top = VS_sync + 25 + 8;
+localparam VS_video = VS_top + 480;
+localparam VS_bottom = VS_video + 10;
+localparam VS_total = 525;

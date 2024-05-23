@@ -9,10 +9,21 @@ module top (
 );
   wire vga_clk;
   wire [11:0] vga_rgb;
-  wire [11:0] pixel = (120 <= pix_x) & (pix_x < 420) & (120 <= pix_y) & (pix_y < 320) ? 12'hF00 : 12'h00F;
+  reg [11:0] pixel;
   wire [9:0] pix_x;
   wire [9:0] pix_y;
-
+  
+  always @ (*) begin
+    if (pix_x < 60) pixel <= 12'hF00;
+    else if (pix_x < 120) pixel <= 12'hFF0;
+    else if (pix_x < 180) pixel <= 12'h0F0;
+    else if (pix_x < 240) pixel <= 12'h0FF;
+    else if (pix_x < 300) pixel <= 12'h00F;
+    else if (pix_x < 360) pixel <= 12'hF0F;
+    else if (pix_x > 580) pixel <= 12'hFFF;
+    else pixel <= 12'h000;
+   end
+    
   clk_div_vga clk_div_vga_inst (
       .clk_in (clk),
       .clk_out(vga_clk)
