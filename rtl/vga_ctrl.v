@@ -9,7 +9,7 @@ module vga_ctrl (
     output wire [11:0] rgb
 );
 
-  `include "./parameters/vga_parameter.v"
+  `include "./parameter.v"
 
   reg [9:0] hcnt, vcnt;
 

@@ -10,3 +10,6 @@ parameter VS_video = VS_top + 480;
 parameter VS_bottom = VS_video + 10;
 parameter VS_total = 525;
 
+parameter SCREEN_WIDTH = 640;
+parameter SCREEN_HEIGHT = 480;
+

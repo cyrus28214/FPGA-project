@@ -9,8 +9,7 @@ module vga_mem (
     output wire [11:0] rgb
 );
 
-  `include "./parameters/vga_parameter.v"
-  `include "./parameters/screen_parameter.v"
+  `include "./parameter.v"
 
 
   reg [9:0] hcnt, vcnt;
