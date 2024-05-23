@@ -1,11 +1,11 @@
-localparam HS_sync = 96;
-localparam HS_left = HS_sync + 40 + 8;
-localparam HS_video = HS_left + 640;
-localparam HS_right = HS_video + 16;
-localparam HS_total = 800;
+parameter HS_sync = 96;
+parameter HS_left = HS_sync + 40 + 8;
+parameter HS_video = HS_left + 640;
+parameter HS_right = HS_video + 16;
+parameter HS_total = 800;
 
-localparam VS_sync = 2;
-localparam VS_top = VS_sync + 25 + 8;
-localparam VS_video = VS_top + 480;
-localparam VS_bottom = VS_video + 10;
-localparam VS_total = 525;
+parameter VS_sync = 2;
+parameter VS_top = VS_sync + 25 + 8;
+parameter VS_video = VS_top + 480;
+parameter VS_bottom = VS_video + 10;
+parameter VS_total = 525;
