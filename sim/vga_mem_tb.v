@@ -1,7 +1,7 @@
 module vga_mem_tb;
   reg clk = 0;
   reg rstn;
-  wire [15:0] mem_data;
+  wire [11:0] mem_data;
   wire [18:0] mem_addr;
   wire mem_en;
   wire hs, vs;
@@ -21,7 +21,7 @@ module vga_mem_tb;
   );
 
   reg [18:0] addra;
-  reg [15:0] dina;
+  reg [11:0] dina;
   reg wea;
 
   bRAM ram (
