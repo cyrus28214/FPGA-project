@@ -1,10 +1,10 @@
-# FPGA-project
+# FPGA Mota
 
-数逻期末 project
+FPGA 魔塔小游戏——浙江大学《数字逻辑设计》期末大作业
 
-## git 协作方法
+## Usage
 
-说明，为了使用 git 协作编辑 Vivado 项目并进行版本管理，使用 tcl 来创建和更新工程，使用方法：
+使用 tcl 来创建和更新工程，使用方法：
 
 ```powershell
 vivado -mode tcl -source create_project.tcl
@@ -14,17 +14,28 @@ vivado -mode tcl -source create_project.tcl
 
 每次 pull 时，可以手动查看 tcl 脚本里的更改，并在 Vivado 中的 Tcl Console 中运行。
 
-## Vscode 插件
+## Notes
 
-推荐安装[Digital IDE 插件](https://sterben.nitcloud.cn/zh/)，并在设置里配置 Vivado 路径。
-
-## 生成 coe 文件
+### 生成 coe 文件
 
 ```bash
 python ./script/image2coe.py ./image/bg.jpg
 ```
 
-## 参考资料
+## Contributing
+
+本项目使用 VS Code 开发，推荐安装 [Digital IDE 插件](https://sterben.nitcloud.cn/zh/)，并在设置里配置 Vivado 路径。
+
+使用 [eirikpre.systemverilog](https://marketplace.visualstudio.com/items?itemName=eirikpre.systemverilog) 插件进行代码格式化，插件配置如下：
+
+```json
+{
+  "systemverilog.compileOnSave": true,
+  "systemverilog.formatCommand": "verible-verilog-format --column_limit 200 --indentation_spaces 3 --wrap_spaces 3 --formal_parameters_indentation indent --named_parameter_indentation indent --named_port_indentation indent --port_declarations_indentation indent"
+}
+```
+
+## Useful Links
 
 [Vivado Design Suite Tcl Command Reference Guide](https://docs.amd.com/r/en-US/ug835-vivado-tcl-commands)
 
