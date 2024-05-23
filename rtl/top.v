@@ -8,7 +8,7 @@ module top (
     output wire [3:0] vga_blue
 );
   wire vga_clk;
-  wire [3:0] vga_rgb;
+  wire [11:0] vga_rgb;
   wire [11:0] pixel = 12'hF00;
   wire pix_x;
   wire pix_y;
