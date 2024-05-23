@@ -35,7 +35,7 @@ def image2hex(image: Image.Image) -> list[str]:
     G = image[:, :, 1] >> 4
     B = image[:, :, 2] >> 4
     A = image[:, :, 3] >> 7
-    image = A << 11 | R << 8 | G << 4 | B
+    image = A << 12 | R << 8 | G << 4 | B
     return [f"{pixel:04X}" for pixel in image.flatten()]
 
 reousrces_dict = {
@@ -44,7 +44,8 @@ reousrces_dict = {
 
 def main():
     base_path = './resources'
-    out_path = './resources/resources.coe'
+    coe_out_path = './resources/resources.coe'
+    param_out_path = './rtl/resources_param.v'
     
     names, images = [], []
     for name, path in reousrces_dict.items():
@@ -61,14 +62,15 @@ def main():
     for name, addr in zip(names, addrs):
         print(f"{name} : 0x{addr:08X}")
     
-    with open(out_path, 'w') as f:
+    with open(coe_out_path, 'w') as f:
         f.write(f"memory_initialization_radix=16;\nmemory_initialization_vector=\n\n")
         entries = []
         for name, addr, hex in zip(names, addrs, hexs):
             entries.append(
                 f"; {name} : 0x{addr:08X}\n{','.join(hex)}"
             )
-        f.write(",\n\n".join(entries) + ';\n')  
+        f.write(",\n\n".join(entries) + ';\n')
+        
     
 
 if __name__ == '__main__':
