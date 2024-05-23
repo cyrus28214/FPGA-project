@@ -16,7 +16,7 @@ def image2hex(img_path):
     G = image[:, :, 1] >> 4
     B = image[:, :, 2] >> 4
     image = R << 8 | G << 4 | B
-    return ",".join([f"{pixel:03X}" for pixel in image.flatten()])
+    return ",".join([f"{pixel:04X}" for pixel in image.flatten()])
 
 def write_coe(coe_path, hex_str):
     with open(coe_path, 'w') as f:
