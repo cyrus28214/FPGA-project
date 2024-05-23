@@ -18,7 +18,7 @@ module top (
   );
 
   wire [18:0] mem_addr;
-  wire [11:0] mem_data;
+  wire [15:0] mem_data;
   wire mem_en;
 
   vga_mem vga_mem_inst (
@@ -33,6 +33,7 @@ module top (
   );
 
   bRAM ram_inst (
+      .clka (clk),
       .clkb (vga_clk),
       .enb  (mem_en),
       .addrb(mem_addr),

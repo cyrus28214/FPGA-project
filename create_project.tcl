@@ -47,7 +47,7 @@ set_property -dict [list \
 # 写延迟：一个时钟周期。
 create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name bRAM
 set_property -dict [list \
-  CONFIG.Write_Width_A {12} \
+  CONFIG.Write_Width_A {16} \
   CONFIG.Write_Depth_A {524288} \
   CONFIG.Enable_A {Use_ENA_Pin} \
   CONFIG.Enable_B {Use_ENB_Pin} \

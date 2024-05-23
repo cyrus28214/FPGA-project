@@ -4,11 +4,11 @@ module bRAM_tb;
   reg         clk = 0;
 
   reg  [ 3:0] addra;
-  reg  [11:0] dina;
+  reg  [15:0] dina;
   reg         wea = 1;
 
   reg  [ 3:0] addrb = 0;
-  wire [11:0] doutb;
+  wire [15:0] doutb;
 
   always #5 clk = ~clk;
 

@@ -1,7 +1,7 @@
 module vga_mem (
     input wire clk,  //25.172MHz@60Hz
     input wire rstn,
-    input wire [11:0] mem_data,
+    input wire [15:0] mem_data,
     output wire mem_en,
     output wire [18:0] mem_addr,
     output wire hs,
