@@ -43,7 +43,7 @@ set_property -dict [list \
   CONFIG.Enable_A {Use_ENA_Pin} \
   CONFIG.Enable_B {Use_ENB_Pin} \
   CONFIG.Memory_Type {True_Dual_Port_RAM} \
-  CONFIG.Coe_File [file normalize ./image/bg.jpg.coe] \
+  CONFIG.Coe_File [file normalize ./resources/resources.coe] \
   CONFIG.Load_Init_File {true} \
 ] [get_ips bRAM]
 

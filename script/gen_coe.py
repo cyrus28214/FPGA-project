@@ -44,6 +44,8 @@ reousrces_dict = {
 
 def main():
     base_path = './resources'
+    out_path = './resources/resources.coe'
+    
     names, images = [], []
     for name, path in reousrces_dict.items():
         images.extend(split_image(f"{base_path}/{path}"))
@@ -59,7 +61,14 @@ def main():
     for name, addr in zip(names, addrs):
         print(f"{name} : 0x{addr:08X}")
     
-    
+    with open(out_path, 'w') as f:
+        f.write(f"memory_initialization_radix=16;\nmemory_initialization_vector=\n\n")
+        entries = []
+        for name, addr, hex in zip(names, addrs, hexs):
+            entries.append(
+                f"; {name} : 0x{addr:08X}\n{','.join(hex)}"
+            )
+        f.write(",\n\n".join(entries) + ';\n')  
     
 
 if __name__ == '__main__':

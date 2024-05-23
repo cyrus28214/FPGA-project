@@ -19,7 +19,7 @@ vivado -mode tcl -source create_project.tcl
 ### 生成 coe 文件
 
 ```bash
-python ./script/image2coe.py ./image/bg.jpg
+python ./script/gen_coe.py
 ```
 
 ## Contributing
