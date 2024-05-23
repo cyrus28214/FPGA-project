@@ -9,9 +9,9 @@ module top (
 );
   wire vga_clk;
   wire [11:0] vga_rgb;
-  wire [11:0] pixel = 12'hF00;
-  wire pix_x;
-  wire pix_y;
+  wire [11:0] pixel = (120 <= pix_x) & (pix_x < 420) & (120 <= pix_y) & (pix_y < 320) ? 12'hF00 : 12'h00F;
+  wire [9:0] pix_x;
+  wire [9:0] pix_y;
 
   clk_div_vga clk_div_vga_inst (
       .clk_in (clk),
@@ -29,8 +29,8 @@ module top (
       .rgb(vga_rgb)
   );
 
-  assign vga_red   = vga_rgb[3:0];
+  assign vga_red   = vga_rgb[11:8];
   assign vga_green = vga_rgb[7:4];
-  assign vga_blue  = vga_rgb[11:8];
+  assign vga_blue  = vga_rgb[3:0];
 
 endmodule
