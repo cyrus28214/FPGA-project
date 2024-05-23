@@ -56,7 +56,7 @@ module vga_mem (
     end
   end
 
-  assign mem_addr = {pix_y[8:0], pix_x};
+  assign mem_addr = (pix_y * HS_width + pix_x);
   assign mem_en = pixel_req;
   assign pixel = mem_data[11:0];
 

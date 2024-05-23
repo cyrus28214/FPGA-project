@@ -12,32 +12,28 @@ module top (
   reg [11:0] pixel;
   wire [9:0] pix_x;
   wire [9:0] pix_y;
-  
-  always @ (*) begin
-    if (pix_x < 60) pixel <= 12'hF00;
-    else if (pix_x < 120) pixel <= 12'hFF0;
-    else if (pix_x < 180) pixel <= 12'h0F0;
-    else if (pix_x < 240) pixel <= 12'h0FF;
-    else if (pix_x < 300) pixel <= 12'h00F;
-    else if (pix_x < 360) pixel <= 12'hF0F;
-    else if (pix_x > 580) pixel <= 12'hFFF;
-    else pixel <= 12'h000;
-   end
-    
+
   clk_div_vga clk_div_vga_inst (
       .clk_in (clk),
       .clk_out(vga_clk)
   );
 
-  vga_ctrl vga_ctrl_inst (
+  vga_mem dut (
       .clk(vga_clk),
-      .rstn(RSTN),
-      .pixel(pixel),
-      .pix_x(pix_x),
-      .pix_y(pix_y),
-      .hs(vga_hs),
-      .vs(vga_vs),
-      .rgb(vga_rgb)
+      .rstn(rstn),
+      .mem_data(mem_data),
+      .mem_addr(mem_addr),
+      .mem_en(mem_en),
+      .hs(hs),
+      .vs(vs),
+      .rgb(rgb)
+  );
+
+  bRAM ram (
+      .clkb (vga_clk),
+      .enb  (mem_en),
+      .addrb(mem_addr),
+      .doutb(mem_data)
   );
 
   assign vga_red   = vga_rgb[11:8];
