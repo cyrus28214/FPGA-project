@@ -33,21 +33,12 @@ set_property -dict [list \
   CONFIG.USE_RESET {false} \
 ] [get_ips clk_div_vga]
 
-# Sing Port ROM
-create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name blk_mem_gen_0
-set_property -dict [list \
-  CONFIG.Coe_File [file normalize ./rom/rom.coe] \
-  CONFIG.Enable_A {Always_Enabled} \
-  CONFIG.Load_Init_File {true} \
-  CONFIG.Memory_Type {Single_Port_ROM} \
-] [get_ips blk_mem_gen_0]
-
 # True Dual Port RAM
 # 读延迟：两个时钟周期，第一拍设置addr，第三拍才能获得输出。
 # 写延迟：一个时钟周期。
 create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name bRAM
 set_property -dict [list \
-  CONFIG.Write_Width_A {12} \
+  CONFIG.Write_Width_A {16} \
   CONFIG.Write_Depth_A {524288} \
   CONFIG.Enable_A {Use_ENA_Pin} \
   CONFIG.Enable_B {Use_ENB_Pin} \

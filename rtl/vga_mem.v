@@ -1,7 +1,7 @@
 module vga_mem (
     input wire clk,  //25.172MHz@60Hz
     input wire rstn,
-    input wire [11:0] mem_data,
+    input wire [15:0] mem_data,
     output wire mem_en,
     output wire [18:0] mem_addr,
     output wire hs,
@@ -29,8 +29,8 @@ module vga_mem (
     end
   end
 
-  assign hs = (hcnt < VS_sync);
-  assign vs = (vcnt < HS_sync);
+  assign hs = (hcnt < HS_sync);
+  assign vs = (vcnt < VS_sync);
 
   wire video_on = (HS_left <= hcnt)
     && (hcnt < HS_video)
