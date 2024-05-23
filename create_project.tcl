@@ -40,10 +40,10 @@ create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_
 set_property -dict [list \
   CONFIG.Write_Width_A {16} \
   CONFIG.Write_Depth_A {524288} \
-  CONFIG.Enable_A {Use_ENA_Pin} \
-  CONFIG.Enable_B {Use_ENB_Pin} \
+  CONFIG.Enable_A {Always_Enabled} \
+  CONFIG.Enable_B {Always_Enabled} \
   CONFIG.Memory_Type {True_Dual_Port_RAM} \
-  CONFIG.Coe_File [file normalize ./resources/resources.coe] \
+  CONFIG.Coe_File [file normalize ./resources/bg.jpg.coe] \
   CONFIG.Load_Init_File {true} \
 ] [get_ips bRAM]
 
