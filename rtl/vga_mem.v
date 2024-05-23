@@ -29,8 +29,8 @@ module vga_mem (
     end
   end
 
-  assign hs = (hcnt < VS_sync);
-  assign vs = (vcnt < HS_sync);
+  assign hs = (hcnt < HS_sync);
+  assign vs = (vcnt < VS_sync);
 
   wire video_on = (HS_left <= hcnt)
     && (hcnt < HS_video)

@@ -34,9 +34,17 @@ module top (
 
   bRAM ram_inst (
       .clka (clk),
+      .addra(0),
+      .wea(0),
+      .dina(0),
+      .ena(0),
+      .douta(),
+      
       .clkb (vga_clk),
-      .enb  (mem_en),
       .addrb(mem_addr),
+      .web(0),
+      .dinb(0),
+      .enb  (mem_en),
       .doutb(mem_data)
   );
 
