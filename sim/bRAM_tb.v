@@ -14,11 +14,11 @@ module bRAM_tb;
 
   bRAM dut (
       .clka (clk),
-      .addra(addra),
+      .addra({{15{1'b0}}, addra}),
       .dina (dina),
       .wea  (wea),
       .clkb (clk),
-      .addrb(addrb),
+      .addrb({{15{1'b0}}, addrb}),
       .doutb(doutb)
   );
 
