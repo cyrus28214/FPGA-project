@@ -1,47 +1,32 @@
 module render_tile_tb;
+  reg         clk = 0;
+  reg         rstn = 0;
+  reg  [18:0] tile_addr = 5;
+  reg  [ 9:0] top = 2;
+  reg  [ 9:0] left = 3;
 
-  reg clk = 0, rstn = 0;
-  reg [18:0] tile_addr = 0;
-  reg [ 9:0] x = 13;
-  reg [ 9:0] y = 3;
+  // outports wire
+  wire [18:0] dst_addr;
+  wire [15:0] dst_data;
+  wire        dst_wr;
 
-  wire src_rd, dst_wr;
-  wire [18:0] src_addr, dst_addr;
-  wire [15:0] src_data, dst_data;
+  render_tile dut (
+      .clk      (clk),
+      .rstn     (rstn),
+      .tile_addr(tile_addr),
+      .top      (top),
+      .left     (left),
+      .dst_addr (dst_addr),
+      .dst_data (dst_data),
+      .dst_wr   (dst_wr)
+  );
 
   always #5 clk = ~clk;
 
-  render_tile dut (
-      .clk(clk),
-      .rstn(rstn),
-      .tile_addr(tile_addr),
-      .x(x),
-      .y(y),
-      .src_rd(src_rd),
-      .src_addr(src_addr),
-      .src_data(src_data),
-      .dst_wr(dst_wr),
-      .dst_addr(dst_addr),
-      .dst_data(dst_data)
-  );
-
-  bRAM bRAM_inst (
-      .clka (clk),
-      .addra(dst_addr),
-      .dina (dst_data),
-      .wea  (dst_wr)
-  );
-
-  bROM bROM_inst (
-      .clka (clk),
-      .addra(src_addr),
-      .douta(src_data)
-  );
-
   initial begin
-    rstn = 0;
-    #40;
+    #20;
     rstn = 1;
   end
+
 endmodule
 

@@ -34,14 +34,14 @@ set_property -dict [list \
 ] [get_ips clk_div_vga]
 
 # Single Port ROM
-create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name bROM
+create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name bROM_tile
 set_property -dict [list \
   CONFIG.Enable_A {Always_Enabled} \
   CONFIG.Memory_Type {Single_Port_ROM} \
   CONFIG.Write_Depth_A {524288} \
   CONFIG.Coe_File [file normalize ./resources/resources.coe] \
   CONFIG.Load_Init_File {true} \
-] [get_ips bROM]
+] [get_ips bROM_tile]
 
 # True Dual Port RAM
 # 读延迟：两个时钟周期，第一拍设置addr，第三拍才能获得输出。
