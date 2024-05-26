@@ -1,4 +1,4 @@
-module render_tile (
+module render_tile (  // need at least 18 cycles to render a tile
     input wire clk,
     input wire rstn,
     input wire [18:0] tile_addr,
