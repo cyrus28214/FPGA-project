@@ -30,7 +30,7 @@ def image2hex(image: Image.Image) -> list[str]:
     '''
     if image.mode != "RGBA":
         image = image.convert("RGBA")
-    image = np.array(image)
+    image = np.array(image).astype(np.uint16)
     R = image[:, :, 0] >> 4
     G = image[:, :, 1] >> 4
     B = image[:, :, 2] >> 4
@@ -39,6 +39,7 @@ def image2hex(image: Image.Image) -> list[str]:
     return [f"{pixel:04X}" for pixel in image.flatten()]
 
 reousrces_dict = {
+    "white" : "/texture/white.png",
     "hero" : "/entity/hero.png"
 }
 
