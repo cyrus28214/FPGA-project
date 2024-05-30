@@ -40,8 +40,8 @@ module vga_mem (
 
   wire pixel_req = (HS_left - 2 <= hcnt)
     && (hcnt < HS_video - 2)
-    && (VS_top - 2 <= vcnt)
-    && (vcnt < VS_video - 2); //
+    && (VS_top <= vcnt)
+    && (vcnt < VS_video); //
 
   reg [9:0] pix_x;
   reg [9:0] pix_y;
@@ -52,7 +52,7 @@ module vga_mem (
       pix_y <= 0;
     end else begin
       pix_x <= pixel_req ? hcnt + 2 - HS_left : 0;
-      pix_y <= pixel_req ? vcnt + 2 - VS_top : 0;
+      pix_y <= pixel_req ? vcnt - VS_top : 0;
     end
   end
 
