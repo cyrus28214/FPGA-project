@@ -1,4 +1,3 @@
-//vga
 parameter HS_sync = 96;
 parameter HS_left = HS_sync + 40 + 8;
 parameter HS_video = HS_left + 640;
@@ -10,10 +9,3 @@ parameter VS_top = VS_sync + 25 + 8;
 parameter VS_video = VS_top + 480;
 parameter VS_bottom = VS_video + 10;
 parameter VS_total = 525;
-
-//map
-parameter SCREEN_WIDTH = 640;
-parameter SCREEN_HEIGHT = 480;
-
-parameter MAP_WIDTH = 11;
-parameter MAP_HEIGHT = 11;

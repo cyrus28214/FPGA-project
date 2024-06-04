@@ -6,8 +6,8 @@ module render_pixel (
     output wire [18:0] dst_addr,
     output wire [15:0] dst_data,
     output wire dst_wr
-);
-  `include "./parameter.v"
+  );
+`include "./parameters/game_params.v"
 
   assign dst_addr = (pos_y * SCREEN_WIDTH + pos_x);
   assign dst_data = color;
