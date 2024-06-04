@@ -1,8 +1,6 @@
 from PIL import Image
 import numpy as np
 
-TARGET_WIDTH, TARGET_HEIGHT = 640, 480
-
 def split_image(image_path, size = (32, 32)) -> list[Image.Image] :
     '''
     将图片按照size切割
@@ -40,7 +38,10 @@ def image2hex(image: Image.Image) -> list[str]:
 
 reousrces_dict = {
     "white" : "/texture/white.png",
-    "hero" : "/entity/hero.png"
+    "ground": "/texture/ground.png",
+    "wall" : "/texture/wall.png",
+    "door" : "/entity/door.png",
+    "hero" : "/entity/hero.png",
 }
 
 def main():
@@ -50,8 +51,9 @@ def main():
     
     names, images = [], []
     for name, path in reousrces_dict.items():
-        images.extend(split_image(f"{base_path}/{path}"))
-        names.extend([f"{name}[{i}]" for i in range(len(images))])
+        splited = split_image(f"{base_path}/{path}")
+        images.extend(splited)
+        names.extend([f"{name}[{i}]" for i in range(len(splited))])
     hexs = [image2hex(img) for img in images]
     
     addr = 0
