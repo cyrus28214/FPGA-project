@@ -41,6 +41,12 @@ def hex_fancy(hex: list[str]) -> str:
     hex = ',\n'.join(hex)
     return hex
 
+def gen_vlog_params(names: list[str], addrs: list[int]) -> str:
+    ret = ""
+    for name, addr in zip(names, addrs):
+        ret += f"parameter RS_{name} = 32'h{addr:08X};\n"
+    return ret
+
 resources_dict = {
     "white" : "/texture/white.png",
     "ground": "/texture/ground.png",
@@ -52,13 +58,13 @@ resources_dict = {
 def main():
     base_path = './resources'
     coe_out_path = './resources/resources.coe'
-    param_out_path = './rtl/resources_param.v'
+    param_out_path = './rtl/parameters/resources_params.v'
     
     names, images = [], []
     for name, path in resources_dict.items():
         splited = split_image(f"{base_path}/{path}")
         images.extend(splited)
-        names.extend([f"{name}[{i}]" for i in range(len(splited))])
+        names.extend([f"{name}_{i}" for i in range(len(splited))])
     hexs = [image2hex(img) for img in images]
     
     addr = 0
@@ -75,6 +81,11 @@ def main():
     with open(coe_out_path, 'w') as f:
         f.write(f"memory_initialization_radix=16;\nmemory_initialization_vector=\n\n")
         f.write(',\n\n'.join(hexs_fancy) + ';\n')
+    print(f"COE文件已生成到{coe_out_path}")
+        
+    with open(param_out_path, 'w') as f:
+        f.write(gen_vlog_params(names, addrs))
+    print(f"参数文件已生成到{param_out_path}")
         
 if __name__ == '__main__':
     main()
