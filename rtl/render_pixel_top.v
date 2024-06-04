@@ -1,8 +1,4 @@
 //this module is a simple top module for testing render_tile
-
-`include "./render_tile.v"
-`include "./pbdebounce.v"
-`include "./render_pixel.v"
 module render_pixel_top (
     input wire clk,  //100MHz
     input wire RSTN,
@@ -51,26 +47,26 @@ module render_pixel_top (
   );
 
   //pos
-   reg [9:0] pos_x;
-   reg [9:0] pos_y;
-   always @(negedge RSTN or posedge cnt[17]) begin
-     if (!RSTN) begin
-       pos_x <= 10'd320;
-       pos_y <= 10'd240;
-     end else if (btn_dbc[0]) begin
-       pos_x <= pos_x - 1;
-       //    else begin
-       //      if (btn_dbc[0] || btn_dbc[1]) begin
-       //        pos_x <= btn_dbc[0] ? pos_x - 10'd1 : pos_x + 10'd1;
-       //      end
-       //      if (btn_dbc[2] || btn_dbc[3]) begin
-       //        pos_y <= btn_dbc[2] ? pos_y - 10'd1 : pos_y + 10'd1;
-       //      end
-       //    end
-     end
-   end
-//  wire [9:0] pos_x = switch[0] ? 100 : 300;
-//  wire [9:0] pos_y = switch[1] ? 100 : 300;
+  reg [9:0] pos_x;
+  reg [9:0] pos_y;
+  always @(negedge RSTN or posedge cnt[17]) begin
+    if (!RSTN) begin
+      pos_x <= 10'd320;
+      pos_y <= 10'd240;
+    end else begin
+      if (BTN_Y[0]) pos_x <= pos_x - 1;
+      //    else begin
+      //      if (btn_dbc[0] || btn_dbc[1]) begin
+      //        pos_x <= btn_dbc[0] ? pos_x - 10'd1 : pos_x + 10'd1;
+      //      end
+      //      if (btn_dbc[2] || btn_dbc[3]) begin
+      //        pos_y <= btn_dbc[2] ? pos_y - 10'd1 : pos_y + 10'd1;
+      //      end
+      //    end
+    end
+  end
+  //  wire [9:0] pos_x = switch[0] ? 100 : 300;
+  //  wire [9:0] pos_y = switch[1] ? 100 : 300;
 
   // render_tile
 
@@ -137,7 +133,7 @@ module render_pixel_top (
       .clka (clk),
       .addra(dst_addr),
       .wea  (dst_wr),
-      .dina (dst_data),
+      .dina (cnt[31:16]),
       .douta(),
 
       .clkb (vga_clk),

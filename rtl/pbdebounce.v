@@ -14,3 +14,23 @@ module pbdebounce (
   end
 
 endmodule
+
+module pbdebounce_n #(
+    parameter N = 4
+) (
+    input wire clk,
+    input wire [N-1:0] button,
+    output wire [N-1:0] pbreg
+);
+
+  genvar i;
+  generate
+    for (i = 0; i < N; i = i + 1) begin
+      pbdebounce u_pbdebounce (
+          .clk(clk),
+          .button(button[i]),
+          .pbreg(pbreg[i])
+      );
+    end
+  endgenerate
+endmodule
