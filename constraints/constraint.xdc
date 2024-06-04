@@ -47,15 +47,17 @@ create_clock -period 10.000 -name clk [get_ports "clk"]
 set_property PACKAGE_PIN W13 [get_ports RSTN]
 set_property IOSTANDARD LVCMOS18 [get_ports RSTN]
 
-# # 7SEG
-# set_property PACKAGE_PIN M24 [get_ports seg_clk]
-# set_property PACKAGE_PIN L24 [get_ports set_sout]
-# set_property PACKAGE_PIN R18 [get_ports seg_pen]
-# set_property PACKAGE_PIN M20 [get_ports seg_clrn]
-# set_property IOSTANDARD LVCMOS33 [get_ports seg_clk]
-# set_property IOSTANDARD LVCMOS33 [get_ports set_sout]
-# set_property IOSTANDARD LVCMOS33 [get_ports seg_pen]
-# set_property IOSTANDARD LVCMOS33 [get_ports seg_clrn]
+ # 7SEG
+set_property PACKAGE_PIN M24 [get_ports seg_clk]
+set_property PACKAGE_PIN L24 [get_ports seg_sout]
+set_property PACKAGE_PIN R18 [get_ports seg_pen]
+set_property PACKAGE_PIN M20 [get_ports seg_clrn]
+set_property IOSTANDARD LVCMOS33 [get_ports seg_clk]
+set_property IOSTANDARD LVCMOS33 [get_ports seg_sout]
+set_property IOSTANDARD LVCMOS33 [get_ports seg_pen]
+set_property IOSTANDARD LVCMOS33 [get_ports seg_clrn]
+set_property PACKAGE_PIN M24 [get_ports seg_clk]
+
 
 # # Audio out
 # set_property PACKAGE_PIN P26 [get_ports AUD_PWM]
@@ -63,17 +65,17 @@ set_property IOSTANDARD LVCMOS18 [get_ports RSTN]
 # set_property IOSTANDARD LVCMOS33 [get_ports AUD_PWM]
 # set_property IOSTANDARD LVCMOS33 [get_ports AUD_SD]
 
-# # Key Array
-# set_property PACKAGE_PIN V17 [get_ports BTN_X0]
-# set_property IOSTANDARD LVCMOS18 [get_ports BTN_X0]
-# set_property PACKAGE_PIN W18 [get_ports BTN_X1]
-# set_property IOSTANDARD LVCMOS18 [get_ports BTN_X1]
-# set_property PACKAGE_PIN W19 [get_ports BTN_X2]
-# set_property IOSTANDARD LVCMOS18 [get_ports BTN_X2]
-# set_property PACKAGE_PIN W15 [get_ports BTN_X3]
-# set_property IOSTANDARD LVCMOS18 [get_ports BTN_X3]
-set_property PACKAGE_PIN W16 [get_ports BTN_X4]
-set_property IOSTANDARD LVCMOS18 [get_ports BTN_X4]
+# Key Array
+set_property PACKAGE_PIN V17 [get_ports {BTN_X[0]}]
+set_property IOSTANDARD LVCMOS18 [get_ports {BTN_X[0]}]
+set_property PACKAGE_PIN W18 [get_ports {BTN_X[1]}]
+set_property IOSTANDARD LVCMOS18 [get_ports {BTN_X[1]}]
+set_property PACKAGE_PIN W19 [get_ports {BTN_X[2]}]
+set_property IOSTANDARD LVCMOS18 [get_ports {BTN_X[2]}]
+set_property PACKAGE_PIN W15 [get_ports {BTN_X[3]}]
+set_property IOSTANDARD LVCMOS18 [get_ports {BTN_X[3]}]
+set_property PACKAGE_PIN W16 [get_ports {BTN_X[4]}]
+set_property IOSTANDARD LVCMOS18 [get_ports {BTN_X[4]}]
 set_property PACKAGE_PIN V18 [get_ports {BTN_Y[0]}]
 set_property IOSTANDARD LVCMOS18 [get_ports {BTN_Y[0]}]
 set_property PACKAGE_PIN V19 [get_ports {BTN_Y[1]}]
@@ -82,6 +84,7 @@ set_property PACKAGE_PIN V14 [get_ports {BTN_Y[2]}]
 set_property IOSTANDARD LVCMOS18 [get_ports {BTN_Y[2]}]
 set_property PACKAGE_PIN W14 [get_ports {BTN_Y[3]}]
 set_property IOSTANDARD LVCMOS18 [get_ports {BTN_Y[3]}]
+
 
 # # Arduino
 # set_property PACKAGE_PIN AF25 [get_ports ard_rst]
