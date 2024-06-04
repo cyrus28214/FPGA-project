@@ -36,7 +36,12 @@ def image2hex(image: Image.Image) -> list[str]:
     image = A << 12 | R << 8 | G << 4 | B
     return [f"{pixel:04X}" for pixel in image.flatten()]
 
-reousrces_dict = {
+def hex_fancy(hex: list[str]) -> str:
+    hex = [','.join(hex[i:i+32]) for i in range(0, len(hex), 32)]
+    hex = ',\n'.join(hex)
+    return hex
+
+resources_dict = {
     "white" : "/texture/white.png",
     "ground": "/texture/ground.png",
     "wall" : "/texture/wall.png",
@@ -50,7 +55,7 @@ def main():
     param_out_path = './rtl/resources_param.v'
     
     names, images = [], []
-    for name, path in reousrces_dict.items():
+    for name, path in resources_dict.items():
         splited = split_image(f"{base_path}/{path}")
         images.extend(splited)
         names.extend([f"{name}[{i}]" for i in range(len(splited))])
@@ -65,9 +70,11 @@ def main():
     for name, addr in zip(names, addrs):
         print(f"{name} : 0x{addr:08X}")
     
+    
+    hexs_fancy = [hex_fancy(hex) for hex in hexs]
     with open(coe_out_path, 'w') as f:
         f.write(f"memory_initialization_radix=16;\nmemory_initialization_vector=\n\n")
-        f.write(','.join(hexs) + '\n')
+        f.write(',\n\n'.join(hexs_fancy) + ';\n')
         
 if __name__ == '__main__':
     main()
