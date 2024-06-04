@@ -67,14 +67,7 @@ def main():
     
     with open(coe_out_path, 'w') as f:
         f.write(f"memory_initialization_radix=16;\nmemory_initialization_vector=\n\n")
-        entries = []
-        for name, addr, hex in zip(names, addrs, hexs):
-            entries.append(
-                f"; {name} : 0x{addr:08X}\n{','.join(hex)}"
-            )
-        f.write(",\n\n".join(entries) + ';\n')
+        f.write(','.join(hexs) + '\n')
         
-    
-
 if __name__ == '__main__':
     main()
