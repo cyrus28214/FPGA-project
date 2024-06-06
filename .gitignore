@@ -4,6 +4,6 @@
 /*.str
 /*.jou
 /*.log
-/.vscode
+# /.vscode
 *.coe
 *.tmp
