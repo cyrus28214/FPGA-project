@@ -3,4 +3,7 @@
 .gen_tiles:
 	python ./script/gen_tiles.py
 
-ll: .gen_tiles
+.gen_maps:
+	python ./script/gen_maps.py
+
+all: .gen_tiles .gen_maps

@@ -1,18 +1,18 @@
 from PIL import Image
 import numpy as np
 
-def split_image(image_path, size = (32, 32)) -> list[Image.Image] :
+def split_image(image_path) -> list[Image.Image] :
     '''
     将图片按照size切割
     '''
     image = Image.open(image_path)
     width, height = image.size
-    if width % size[0]!= 0 or height % size[1]!= 0:
-        raise ValueError("图片尺寸应是size的整数倍")
+    if width % 32 != 0 or height % 32 != 0:
+        raise ValueError("图片尺寸应是32的整数倍")
     images = []
-    for i in range(0, height, size[1]):
-        for j in range(0, width, size[0]):
-            box = (j, i, j+size[0], i+size[1])
+    for i in range(0, height, 32):
+        for j in range(0, width, 32):
+            box = (j, i, j+32, i+32)
             images.append(image.crop(box))
     return images
 
@@ -44,10 +44,11 @@ def hex_fancy(hex: list[str]) -> str:
 def gen_vlog_params(names: list[str], addrs: list[int]) -> str:
     ret = ""
     for name, addr in zip(names, addrs):
-        ret += f"parameter RS_{name} = 32'h{addr:08X};\n"
+        ret += f"parameter RS_{name} = {addr >> 10};\n"
     return ret
 
 resources_dict = {
+    "black" : "/texture/black.png",
     "white" : "/texture/white.png",
     "ground": "/texture/ground.png",
     "wall" : "/texture/wall.png",

@@ -203,3 +203,7 @@ set_property PACKAGE_PIN M22 [get_ports vga_hs]
 set_property PACKAGE_PIN M21 [get_ports vga_vs]
 set_property IOSTANDARD LVCMOS33 [get_ports vga_hs]
 set_property IOSTANDARD LVCMOS33 [get_ports vga_vs]
+
+# buzzer
+set_property PACKAGE_PIN AF25 [get_ports beep]
+set_property IOSTANDARD LVCMOS33 [get_ports beep]

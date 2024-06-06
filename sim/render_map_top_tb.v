@@ -6,7 +6,7 @@ module render_map_top_tb ();
 
   reg  [ 4:0] BTN_Y;
   reg  [15:0] switch;
-  wire        BTN_X4;
+  wire [ 4:0] BTN_X;
   wire        vga_hs;
   wire        vga_vs;
   wire [ 3:0] vga_red;
@@ -17,7 +17,7 @@ module render_map_top_tb ();
       .clk      (clk),
       .BTN_Y    (BTN_Y),
       .switch   (switch),
-      .BTN_X4   (BTN_X4),
+      .BTN_X    (BTN_X),
       .vga_hs   (vga_hs),
       .vga_vs   (vga_vs),
       .vga_red  (vga_red),
@@ -25,11 +25,14 @@ module render_map_top_tb ();
       .vga_blue (vga_blue)
   );
 
-
-
   initial begin
-    BTN_Y[4] = 0; #10;
-    BTN_Y[4] = 1;
+    BTN_Y[1]  = 1;
+    switch[0] = 0;
+    #1000;
+    BTN_Y[1]  = 0;
+    switch[0] = 1;
+    #1000;
+    BTN_Y[1] = 1;
   end
 
 endmodule  //TOP

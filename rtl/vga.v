@@ -14,6 +14,8 @@ module vga (
 `include "./parameters/game_params.v"
 `include "./parameters/vga_params.v"
 
+  parameter LATENCY = 3;
+
   // vga clock
   wire vga_clk;
 
@@ -53,7 +55,7 @@ module vga (
     end
 
   wire video_on = (HS_left <= hcnt && hcnt < HS_video && VS_top <= vcnt && vcnt < VS_video);
-  wire video_early = (HS_left - 2 <= hcnt && hcnt < HS_video - 2 && VS_top <= vcnt && vcnt < VS_video);
+  wire video_early = (HS_left - LATENCY <= hcnt && hcnt < HS_video - LATENCY && VS_top <= vcnt && vcnt < VS_video);
 
   // memory
   reg [18:0] mem_addr;
@@ -86,7 +88,7 @@ module vga (
         begin
           if (video_early)
             begin
-              mem_addr <= HS_left - 2 == hcnt && VS_top == vcnt ? 0 : mem_addr + 1;
+              mem_addr <= HS_left - LATENCY == hcnt && VS_top == vcnt ? 0 : mem_addr + 1;
             end
           vga_rgb <= video_on ? mem_out[11:0] : 0;
         end

@@ -11,6 +11,8 @@ module render_map (
     output wire dst_wr
   );
 
+`include "./parameters/game_params.v"
+
 
   wire [12:0] cnt;
   wire map_clk = cnt[12];
@@ -39,7 +41,7 @@ module render_map (
   reg [3:0] grid_x_next, grid_y_next;
   always @(*)
     begin
-      if (grid_x < 10)
+      if (grid_x != MAP_WIDTH-1)
         begin
           grid_x_next <= grid_x + 1;
           grid_y_next <= grid_y;
@@ -47,7 +49,7 @@ module render_map (
       else
         begin
           grid_x_next <= 0;
-          if (grid_y < 10)
+          if (grid_y != MAP_HEIGHT-1)
             begin
               grid_y_next <= grid_y + 1;
             end
@@ -64,7 +66,6 @@ module render_map (
         begin
           grid_x   <= 0;
           grid_y   <= 0;
-          src_addr <= 0;
         end
       else
         begin
