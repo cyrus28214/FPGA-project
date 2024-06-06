@@ -6,4 +6,7 @@
 .gen_maps:
 	python ./script/gen_maps.py
 
-all: .gen_tiles .gen_maps
+.gen_bg:
+	python ./script/gen_bg.py
+
+all: .gen_tiles .gen_maps .gen_bg

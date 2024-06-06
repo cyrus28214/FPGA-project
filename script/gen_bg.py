@@ -24,9 +24,10 @@ def write_coe(coe_path, hex_str):
         f.write(f"memory_initialization_radix=16;\nmemory_initialization_vector=\n{hex_str};\n")
 
 def main():
-    file_path = sys.argv[1]
+    file_path = "./resources/bg.jpg"
     hex_str = image2hex(file_path)
-    write_coe(f"{file_path}.coe", hex_str)
+    write_coe(file_path + ".coe", hex_str)
+    print(f"背景文件已生成到{file_path}.coe")
     
 if __name__ == '__main__':
     main()
