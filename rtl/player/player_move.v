@@ -66,7 +66,7 @@ module player_move (
   always @(posedge clk or negedge rstn) begin
     if (!rstn) ask_move <= 0;
     else if (state == IDLE && any_move) ask_move <= 1;
-    else if (state == ASK_MOVE && accept_move) ask_move <= 0;
+    else if (state == ASK_MOVE) ask_move <= 0;
   end
 
   //ask_x, ask_y
