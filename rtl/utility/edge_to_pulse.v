@@ -1,5 +1,6 @@
 //将异步边沿信号转化成同步的一周期的脉冲信号
 //本项目中用于将按钮按下/弹起的瞬间转化成脉冲
+//参见/docs/edge_to_pulse_wave.png
 
 module edge_to_pulse (
     input  wire clk,

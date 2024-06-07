@@ -1,4 +1,4 @@
-module render_map_top (
+module top (
     input wire clk,  // 100 MHz
     input wire [3:0] BTN_Y,  // button down is LOW
     input wire [15:0] switch,
@@ -24,6 +24,7 @@ module render_map_top (
       .rstn(rstn),
       .div_res(div_res)
   );
+  wire logic_clk = div_res[1];
 
   // button
   assign BTN_X = 5'b01111;
@@ -58,57 +59,58 @@ module render_map_top (
   assign vga_blue  = vga_rgb[3:0];
 
   //player
-  reg [3:0] player_x;
-  reg [3:0] player_y;
-  wire [3:0] player_goto_x;
-  wire [3:0] player_goto_y;
+  //参见/docs/player_move_and_interact.drawio.png
+  wire [3:0] btn_pulse;
 
-  wire [3:0] move; //当按钮弹起，相应的move被设置，等待处理，处理完之后清零
-  reg clear_move;
-
-  btn_reg u_btn_reg (
-      .btn(btn_db),
-      .rstn(rstn && !clear_move),
-      .btn_reg(move)
+  edge_to_pulse u_edge_to_pulse (
+      .clk (logic_clk),
+      .rstn(rstn),
+      .in  (btn_db),
+      .out (btn_pulse)
   );
+
+  wire       ask_move;
+  wire [3:0] ask_x;
+  wire [3:0] ask_y;
+  wire [3:0] player_x;
+  wire [3:0] player_y;
+
+  reg  [3:0] move;
 
   player_move u_player_move (
-      .move(move),
-      .pos_x(player_x),
-      .pos_y(player_y),
-      .pos_x_next(player_goto_x),
-      .pos_y_next(player_goto_y)
+      .clk        (logic_clk),
+      .rstn       (rstn),
+      .move       (move),
+      .ask_move   (ask_move),
+      .ask_x      (ask_x),
+      .ask_y      (ask_y),
+      .accept_move(accept_move),
+      .goto_x     (goto_x),
+      .goto_y     (goto_y),
+      .pos_x      (player_x),
+      .pos_y      (player_y)
   );
 
-  wire [18:0] bRAM_map_addrb = player_goto_y * MAP_WIDTH + player_goto_x;
-  wire [15:0] bRAM_map_doutb;
-  wire [15:0] goto_tile_id = bRAM_map_doutb;
+  wire [18:0] bRAM_map_addrb;
+  wire [15:0] bRAM_map_datab;
+  wire        accept_move;
+  wire [ 3:0] goto_x;
+  wire [ 3:0] goto_y;
 
-  wire [ 3:0] new_pos_x;
-  wire [ 3:0] new_pos_y;
-
-  player_react u_player_react (
-      .org_pos_x(player_x),
-      .org_pos_y(player_y),
-      .goto_pos_x(player_goto_x),
-      .goto_pos_y(player_goto_y),
-      .goto_tile_id(goto_tile_id),
-      .new_pos_x(new_pos_x),
-      .new_pos_y(new_pos_y)
+  interact u_interact (
+      .clk            (div_res[1]),
+      .rstn           (~sys_rst),
+      .player_x       (player_x),
+      .player_y       (player_y),
+      .player_ask_move(ask_move),
+      .player_ask_x   (ask_x),
+      .player_ask_y   (ask_y),
+      .bRAM_map_addr  (bRAM_map_addrb),
+      .bRAM_map_data  (bRAM_map_datab),
+      .accept_move    (accept_move),
+      .goto_x         (goto_x),
+      .goto_y         (goto_y)
   );
-
-  always @(posedge clk or negedge rstn) begin
-    if (!rstn) begin
-      player_x   <= 4'd6;
-      player_y   <= 4'd11;
-      clear_move <= 1'b0;
-    end else if (clear_move) clear_move <= 1'b0;
-    else if (|move) begin
-      player_x   <= new_pos_x;
-      player_y   <= new_pos_y;
-      clear_move <= 1'b1;
-    end
-  end
 
   //map
   wire [ 3:0] grid_x;
