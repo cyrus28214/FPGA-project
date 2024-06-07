@@ -4,21 +4,31 @@ G = 2
 W = 3
 BW = 5
 
-map1f = [
-    [BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW],
-    [BW,  G,  G,  G,  G,  G,  G,  G,  G,  G,  G,  G, BW],
-    [BW,  W,  W,  W,  W,  W,  W,  W,  W,  W,  W,  G, BW],
-    [BW,  G,  G,  G,  W,  G,  W,  G,  G,  G,  W,  G, BW],
-    [BW,  G,  G,  G,  W,  G,  W,  G,  G,  G,  W,  G, BW],
-    [BW,  W,  W,  W,  W,  G,  W,  W,  W,  G,  W,  G, BW],
-    [BW,  G,  G,  G,  W,  G,  G,  G,  G,  G,  W,  G, BW],
-    [BW,  G,  G,  G,  W,  G,  W,  W,  W,  W,  W,  G, BW],
-    [BW,  W,  W,  W,  W,  G,  G,  G,  G,  G,  G,  G, BW],
-    [BW,  G,  G,  G,  W,  W,  G,  W,  W,  W,  W,  W, BW],
-    [BW,  G,  G,  G,  W,  G,  G,  G,  W,  G,  G,  G, BW],
-    [BW,  G,  G,  G,  W,  G,  G,  G,  W,  G,  G,  G, BW],
-    [BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW]
+maps = [
+    [
+        [BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW],
+        [BW,  G,  G,  G,  G,  G,  G,  G,  G,  G,  G,  G, BW],
+        [BW,  W,  W,  W,  W,  W,  W,  W,  W,  W,  W,  G, BW],
+        [BW,  G,  G,  G,  W,  G,  W,  G,  G,  G,  W,  G, BW],
+        [BW,  G,  G,  G,  W,  G,  W,  G,  G,  G,  W,  G, BW],
+        [BW,  W,  W,  W,  W,  G,  W,  W,  W,  G,  W,  G, BW],
+        [BW,  G,  G,  G,  W,  G,  G,  G,  G,  G,  W,  G, BW],
+        [BW,  G,  G,  G,  W,  G,  W,  W,  W,  W,  W,  G, BW],
+        [BW,  W,  W,  W,  W,  G,  G,  G,  G,  G,  G,  G, BW],
+        [BW,  G,  G,  G,  W,  W,  G,  W,  W,  W,  W,  W, BW],
+        [BW,  G,  G,  G,  W,  G,  G,  G,  W,  G,  G,  G, BW],
+        [BW,  G,  G,  G,  W,  G,  G,  G,  W,  G,  G,  G, BW],
+        [BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW],
+    ]
 ]
+
+align_size = 256
+
+maps = [np.array(m, dtype=np.int16).to_bytes() for m in maps]
+
+# right padding
+maps = []
+
 map1f = np.array(map1f, dtype=np.int16)
 
 bts = [','.join(

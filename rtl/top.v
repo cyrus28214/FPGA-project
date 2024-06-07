@@ -2,7 +2,7 @@ module render_map_top (
     input wire clk,  // 100 MHz
     input wire [3:0] BTN_Y,  // button down is LOW
     input wire [15:0] switch,
-    output wire [3:0] BTN_X,
+    output wire [4:0] BTN_X,
     output wire vga_hs,
     output wire vga_vs,
     output wire [3:0] vga_red,
@@ -26,7 +26,7 @@ module render_map_top (
   );
 
   // button
-  assign BTN_X = 4'b0111;
+  assign BTN_X = 5'b01111;
   wire [3:0] btn_db;
   pbdebounce_n #(
       .N(4)
@@ -63,7 +63,7 @@ module render_map_top (
   wire [3:0] player_goto_x;
   wire [3:0] player_goto_y;
 
-  wire [3:0] move; //当按钮弹起，相应的move被设置，等待处理，处理完之后清零。
+  wire [3:0] move; //当按钮弹起，相应的move被设置，等待处理，处理完之后清零
   reg clear_move;
 
   btn_reg u_btn_reg (
@@ -80,6 +80,23 @@ module render_map_top (
       .pos_y_next(player_goto_y)
   );
 
+  wire [18:0] bRAM_map_addrb = player_goto_y * MAP_WIDTH + player_goto_x;
+  wire [15:0] bRAM_map_doutb;
+  wire [15:0] goto_tile_id = bRAM_map_doutb;
+
+  wire [ 3:0] new_pos_x;
+  wire [ 3:0] new_pos_y;
+
+  player_react u_player_react (
+      .org_pos_x(player_x),
+      .org_pos_y(player_y),
+      .goto_pos_x(player_goto_x),
+      .goto_pos_y(player_goto_y),
+      .goto_tile_id(goto_tile_id),
+      .new_pos_x(new_pos_x),
+      .new_pos_y(new_pos_y)
+  );
+
   always @(posedge clk or negedge rstn) begin
     if (!rstn) begin
       player_x   <= 4'd6;
@@ -87,40 +104,18 @@ module render_map_top (
       clear_move <= 1'b0;
     end else if (clear_move) clear_move <= 1'b0;
     else if (|move) begin
-      player_x   <= player_goto_x;
-      player_y   <= player_goto_y;
+      player_x   <= new_pos_x;
+      player_y   <= new_pos_y;
       clear_move <= 1'b1;
     end
   end
 
-  wire [18:0] bRAM_map_addrb = player_goto_y * MAP_WIDTH + player_goto_x;
-  wire [15:0] bRAM_map_doutb;
-  wire [15:0] goto_tile_id = bRAM_map_doutb;
-
-  // wire [3:0]  	new_pos_x;
-  // wire [3:0]  	new_pos_y;
-
-  // player_react u_player_react(
-  //                .org_pos_x(player_x),
-  //                .org_pos_y(player_y),
-  //                .goto_pos_x(player_goto_x),
-  //                .goto_pos_y(player_goto_y),
-  //                .goto_tile_id(goto_tile_id),
-  //                .new_pos_x(new_pos_x),
-  //                .new_pos_y(new_pos_y)
-  //              );
-
-  wire [3:0] new_pos_x = player_goto_x;
-  wire [3:0] new_pos_y = player_goto_y;
-
   //map
-  wire [3:0] grid_x;
-  wire [3:0] grid_y;
-
+  wire [ 3:0] grid_x;
+  wire [ 3:0] grid_y;
 
   wire [15:0] bRAM_map_douta;
   wire [18:0] bRAM_map_addra = grid_y * MAP_WIDTH + grid_x;
-
   wire [15:0] tile_id = (grid_x == player_x && grid_y == player_y) ? RS_hero_0 : bRAM_map_douta;
 
   render_map u_render_map (

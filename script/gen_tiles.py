@@ -1,5 +1,6 @@
 from PIL import Image
 import numpy as np
+import json
 
 def split_image(image_path) -> list[Image.Image] :
     '''
@@ -73,9 +74,13 @@ def main():
     for hex in hexs:
         addrs.append(addr)
         addr += len(hex)
+
+    data_json = [
+        {"name": name, "id": i,"addr": addr} 
+        for i, (name, addr) in enumerate(zip(names, addrs))
+    ]
         
-    for name, addr in zip(names, addrs):
-        print(f"{name} : 0x{addr:08X}")
+    print(json.dumps(data_json, indent=4))
     
     
     hexs_fancy = [hex_fancy(hex) for hex in hexs]
