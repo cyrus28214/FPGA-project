@@ -97,8 +97,9 @@ module top (
   endgenerate
 
   // outports wire
-  wire        player_x;
-  wire        player_y;
+  wire [ 3:0] player_x;
+  wire [ 3:0] player_y;
+  wire [ 3:0] key_num;
   wire [18:0] bRAM_map_addrb;
   wire [15:0] bRAM_map_doutb;
 
@@ -108,6 +109,7 @@ module top (
       .move         (move),
       .player_x     (player_x),
       .player_y     (player_y),
+      .key_num      (key_num),
       .bRAM_map_addr(bRAM_map_addrb),
       .bRAM_map_data(bRAM_map_doutb)
   );
@@ -156,7 +158,7 @@ module top (
   Sseg_Dev u_Sseg_Dev (
       .clk(clk),
       .start(div_res[20]),
-      .hexs(32'hDEADBEEF),
+      .hexs({24'h0147AB, key_num, keys}),
       .points(0),
       .LEs(0),
       .seg_clk(seg_clk),

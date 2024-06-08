@@ -3,16 +3,20 @@ module interact (
     input wire rstn,
     input wire [3:0] player_x,
     input wire [3:0] player_y,
+    input wire [3:0] key_num,
     input wire player_ask_move,
     input wire [3:0] player_ask_x,
     input wire [3:0] player_ask_y,
 
-    output reg  [18:0] bRAM_map_addr,
-    input  wire [15:0] bRAM_map_data,
+    output reg [18:0] bRAM_map_addr,
+    input wire [15:0] bRAM_map_data,
+    output reg bRAM_map_we,
+    output reg [15:0] bRAM_map_dwrite,
 
     output reg accept_move,
     output reg [3:0] goto_x,
-    output reg [3:0] goto_y
+    output reg [3:0] goto_y,
+    output reg [3:0] key_num_out
 );
 
   `include "../parameters/resources_params.v"
@@ -69,6 +73,7 @@ module interact (
   //accept_move, goto_x, goto_y
   wire [3:0] player_goto_x;
   wire [3:0] player_goto_y;
+  wire [3:0] key_num_out_wire;
 
   mux_tiles u_mux_tiles (
       .tile_id      (tile_id),
@@ -76,8 +81,10 @@ module interact (
       .pos_y        (player_ask_y),
       .player_x     (player_x),
       .player_y     (player_y),
+      .key_num      (key_num),
       .player_goto_x(player_goto_x),
-      .player_goto_y(player_goto_y)
+      .player_goto_y(player_goto_y),
+      .key_num_out  (key_num_out_wire)
   );
 
   always @(posedge clk or negedge rstn) begin
@@ -85,10 +92,12 @@ module interact (
       accept_move <= 0;
       goto_x <= 0;
       goto_y <= 0;
+      key_num_out <= 0;
     end else if (state == INTERACTING) begin
       accept_move <= 1;
       goto_x <= player_goto_x;
       goto_y <= player_goto_y;
+      key_num_out <= key_num_out_wire;
     end else begin
       accept_move <= 0;
     end
