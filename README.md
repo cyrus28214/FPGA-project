@@ -42,3 +42,4 @@ python ./script/gen_coe.py
 - [CSDN: FPGA 实战（五）时钟 IP 核（MMCM PLL）](https://blog.csdn.net/weixin_51944426/article/details/120225274)
 - [[野火]FPGA Verilog 开发实战指南](https://doc.embedfire.com/fpga/altera/ep4ce10_pro/zh/latest)
 - 素材贴图来源：[ckcz123/mota-js](https://github.com/ckcz123/mota-js/tree/master/project)
+- [魔塔24层](https://h5mota.com/games/24/)

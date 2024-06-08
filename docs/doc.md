@@ -12,6 +12,10 @@
 
 使用`/resources/map_editor.xlsx`编辑地图。
 
-![./map_editor.png](./map_editor.png)
+![地图编辑器](./map_editor.png)
+
+参考原型如下：
+
+![魔塔24层](./motajs.png)
 
 地图大小是`13 * 13`，最外围用墙围起来（不围也行，有做边界处理）。编辑好的地图用`make`或者`/script/gen_maps.py`生成。
