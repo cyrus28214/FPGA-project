@@ -2,6 +2,7 @@ module top (
     input wire clk,  // 100 MHz
     input wire [3:0] BTN_Y,  // button down is LOW
     input wire [15:0] switch,
+    input PS2_clk, PS2_data,
     output wire [4:0] BTN_X,
     output wire vga_hs,
     output wire vga_vs,
@@ -150,5 +151,19 @@ module top (
       .beep(_beep)
   );
   assign beep = switch[1] & _beep;
+
+  //PS2
+  wire key_up, key_down, key_left, key_right, key_enter;
+  PS2 u_PS2 (
+      .clk(clk),
+      .rstn(rstn),
+      .PS2_clk(PS2_clk),
+      .PS2_data(PS2_data),
+      .up(key_up),
+      .down(key_down),
+      .left(key_left),
+      .right(key_right),
+      .enter(key_enter)
+  );
 
 endmodule
