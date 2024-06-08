@@ -148,5 +148,25 @@
         "name": "key_3",
         "id": 29,
         "addr": 29696
+    },
+    {
+        "name": "slime_0",
+        "id": 30,
+        "addr": 30720
+    },
+    {
+        "name": "slime_1",
+        "id": 31,
+        "addr": 31744
+    },
+    {
+        "name": "slime_2",
+        "id": 32,
+        "addr": 32768
+    },
+    {
+        "name": "slime_3",
+        "id": 33,
+        "addr": 33792
     }
 ]

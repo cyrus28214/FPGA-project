@@ -28,3 +28,7 @@ parameter RS_key_0 = 26;
 parameter RS_key_1 = 27;
 parameter RS_key_2 = 28;
 parameter RS_key_3 = 29;
+parameter RS_slime_0 = 30;
+parameter RS_slime_1 = 31;
+parameter RS_slime_2 = 32;
+parameter RS_slime_3 = 33;

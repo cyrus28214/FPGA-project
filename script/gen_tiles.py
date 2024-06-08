@@ -2,19 +2,24 @@ from PIL import Image
 import numpy as np
 import json
 
+base_img = Image.open("./resources/texture/ground.png").convert("RGBA")
+
 def split_image(image_path) -> list[Image.Image] :
     '''
     将图片按照size切割
     '''
-    image = Image.open(image_path)
+    image = Image.open(image_path).convert("RGBA")
     width, height = image.size
     if width % 32 != 0 or height % 32 != 0:
         raise ValueError("图片尺寸应是32的整数倍")
-    images = []
+    images: list[Image.Image] = []
     for i in range(0, height, 32):
         for j in range(0, width, 32):
             box = (j, i, j+32, i+32)
-            images.append(image.crop(box))
+            image = image.crop(box)
+            image = Image.alpha_composite(base_img, image)
+            images.append(image)
+    
     return images
 
 def image2hex(image: Image.Image) -> list[str]:
@@ -55,7 +60,8 @@ resources_dict = {
     "wall" : "/texture/wall.png",
     "door" : "/entity/door.png",
     "hero" : "/entity/hero.png",
-    "key" : "/entity/key.png"
+    "key" : "/entity/key.png",
+    "slime" : "/entity/slime.png",
 }
 
 def main():

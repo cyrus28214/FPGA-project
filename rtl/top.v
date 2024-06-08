@@ -97,21 +97,25 @@ module top (
   endgenerate
 
   // outports wire
-  wire [ 3:0] player_x;
-  wire [ 3:0] player_y;
-  wire [ 3:0] key_num;
+  wire [3:0] player_x;
+  wire [3:0] player_y;
+  wire [3:0] key_num;
   wire [18:0] bRAM_map_addrb;
   wire [15:0] bRAM_map_doutb;
+  wire bRAM_map_wrb;
+  wire [15:0] bRAM_map_dwriteb;
 
   player u_player (
-      .clk          (logic_clk),
-      .rstn         (rstn),
-      .move         (move),
-      .player_x     (player_x),
-      .player_y     (player_y),
-      .key_num      (key_num),
-      .bRAM_map_addr(bRAM_map_addrb),
-      .bRAM_map_data(bRAM_map_doutb)
+      .clk            (logic_clk),
+      .rstn           (rstn),
+      .move           (move),
+      .player_x       (player_x),
+      .player_y       (player_y),
+      .key_num        (key_num),
+      .bRAM_map_addr  (bRAM_map_addrb),
+      .bRAM_map_data  (bRAM_map_doutb),
+      .bRAM_map_dwrite(bRAM_map_dwriteb),
+      .bRAM_map_wr    (bRAM_map_wrb)
   );
 
 
@@ -141,8 +145,8 @@ module top (
 
       .clkb (~clk),
       .addrb(bRAM_map_addrb),
-      .web  (0),
-      .dinb (0),
+      .web  (bRAM_map_wrb),
+      .dinb (bRAM_map_dwriteb),
       .doutb(bRAM_map_doutb)
   );
 

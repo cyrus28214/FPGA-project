@@ -5,18 +5,37 @@ module mux_tiles (
     input  wire [ 3:0] player_x,
     input  wire [ 3:0] player_y,
     input  wire [ 3:0] key_num,
-    output wire [ 3:0] player_goto_x,
-    output wire [ 3:0] player_goto_y,
-    output wire [ 3:0] key_num_out,
-    output wire [15:0] new_tile_id
+    output reg  [ 3:0] player_goto_x,
+    output reg  [ 3:0] player_goto_y,
+    output reg  [ 3:0] key_num_out,
+    output reg  [15:0] new_tile_id
 );
   `include "../parameters/resources_params.v"
   wire is_wall = (RS_wall_0 <= tile_id && tile_id <= RS_wall_2);
   wire is_key = (RS_key_0 <= tile_id && tile_id <= RS_key_3);
+  wire is_door = (RS_door_0 <= tile_id && tile_id <= RS_door_3);
 
-  assign player_goto_x = is_wall ? player_x : pos_x;
-  assign player_goto_y = is_wall ? player_y : pos_y;
-  assign key_num_out   = is_key ? key_num + 1 : key_num;
-  assign new_tile_id   = is_key ? RS_ground_0 : tile_id;
+  always @(*) begin
+    player_goto_x <= pos_x;
+    player_goto_y <= pos_y;
+    key_num_out   <= key_num;
+    new_tile_id   <= tile_id;
+
+    if (is_wall) begin
+      player_goto_x <= player_x;
+      player_goto_y <= player_y;
+    end else if (is_key) begin
+      key_num_out <= key_num + 1;
+      new_tile_id <= RS_ground_0;
+    end else if (is_door) begin
+      if (key_num == 0) begin
+        player_goto_x <= player_x;
+        player_goto_y <= player_y;
+      end else begin
+        key_num_out <= key_num - 1;
+        new_tile_id <= RS_ground_0;
+      end
+    end
+  end
 
 endmodule
