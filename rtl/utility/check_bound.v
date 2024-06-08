@@ -1,7 +1,6 @@
 module check_bound (
     input  wire [3:0] pos_x,
     input  wire [3:0] pos_y,
-    input  wire [3:0] move,
     output wire [3:0] allow
 );
   `include "../parameters/game_params.v"

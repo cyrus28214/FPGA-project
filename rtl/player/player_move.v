@@ -24,7 +24,6 @@ module player_move (
   check_bound u_check_bound (
       .pos_x(pos_x),
       .pos_y(pos_y),
-      .move (move),
       .allow(allow)
   );
   wire any_move = |bound_move;

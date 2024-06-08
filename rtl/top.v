@@ -104,7 +104,7 @@ module top (
   wire [15:0] bRAM_map_doutb;
 
   player u_player (
-      .clk          (clk),
+      .clk          (logic_clk),
       .rstn         (rstn),
       .move         (move),
       .player_x     (player_x),

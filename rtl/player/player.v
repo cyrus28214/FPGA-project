@@ -6,7 +6,9 @@ module player (
     output wire [3:0] player_y,
     output reg [3:0] key_num,
     output wire [18:0] bRAM_map_addr,
-    input wire [15:0] bRAM_map_data
+    input wire [15:0] bRAM_map_data,
+    output wire bRAM_map_wr,
+    output wire [15:0] bRAM_map_dwrite
 );
 
   wire [3:0] key_num_out;
@@ -39,12 +41,16 @@ module player (
       .player_ask_move(ask_move),
       .player_ask_x   (ask_x),
       .player_ask_y   (ask_y),
+
       .bRAM_map_addr  (bRAM_map_addr),
       .bRAM_map_data  (bRAM_map_data),
-      .accept_move    (accept_move),
-      .goto_x         (goto_x),
-      .goto_y         (goto_y),
-      .key_num_out    (key_num_out)
+      .bRAM_map_dwrite(bRAM_map_dwrite),
+      .bRAM_map_wr    (bRAM_map_wr),
+
+      .accept_move(accept_move),
+      .goto_x     (goto_x),
+      .goto_y     (goto_y),
+      .key_num_out(key_num_out)
   );
 
   always @(posedge clk or negedge rstn) begin

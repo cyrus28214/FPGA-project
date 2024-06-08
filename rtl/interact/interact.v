@@ -10,7 +10,7 @@ module interact (
 
     output reg [18:0] bRAM_map_addr,
     input wire [15:0] bRAM_map_data,
-    output reg bRAM_map_we,
+    output reg bRAM_map_wr,
     output reg [15:0] bRAM_map_dwrite,
 
     output reg accept_move,
@@ -71,9 +71,10 @@ module interact (
   end
 
   //accept_move, goto_x, goto_y
-  wire [3:0] player_goto_x;
-  wire [3:0] player_goto_y;
-  wire [3:0] key_num_out_wire;
+  wire [ 3:0] player_goto_x;
+  wire [ 3:0] player_goto_y;
+  wire [ 3:0] key_num_out_wire;
+  wire [15:0] new_tile_id;
 
   mux_tiles u_mux_tiles (
       .tile_id      (tile_id),
@@ -84,7 +85,8 @@ module interact (
       .key_num      (key_num),
       .player_goto_x(player_goto_x),
       .player_goto_y(player_goto_y),
-      .key_num_out  (key_num_out_wire)
+      .key_num_out  (key_num_out_wire),
+      .new_tile_id  (new_tile_id)
   );
 
   always @(posedge clk or negedge rstn) begin
@@ -98,8 +100,11 @@ module interact (
       goto_x <= player_goto_x;
       goto_y <= player_goto_y;
       key_num_out <= key_num_out_wire;
+      bRAM_map_wr <= 1;
+      bRAM_map_dwrite <= new_tile_id;
     end else begin
       accept_move <= 0;
+      bRAM_map_wr <= 0;
     end
   end
 
