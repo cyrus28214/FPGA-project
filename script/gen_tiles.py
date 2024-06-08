@@ -16,10 +16,8 @@ def split_image(image_path) -> list[Image.Image] :
     for i in range(0, height, 32):
         for j in range(0, width, 32):
             box = (j, i, j+32, i+32)
-            image = image.crop(box)
-            image = Image.alpha_composite(base_img, image)
-            images.append(image)
-    
+            img = Image.alpha_composite(base_img, image.crop(box))
+            images.append(img)
     return images
 
 def image2hex(image: Image.Image) -> list[str]:
@@ -62,6 +60,7 @@ resources_dict = {
     "hero" : "/entity/hero.png",
     "key" : "/entity/key.png",
     "slime" : "/entity/slime.png",
+   "stair" : "/entity/stair.png" 
 }
 
 def main():

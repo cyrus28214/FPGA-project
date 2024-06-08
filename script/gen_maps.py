@@ -25,10 +25,26 @@ BW = tiles["wall_2"]
 D = tiles["door_0"]
 K = tiles["key_0"]
 S = tiles["slime_0"]
+ST0 = tiles["stair_0"]
 
 maps = [
     [
         [BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW],
+        [BW,ST0,  G,  K,  S,  S,  S,  G,  G,  G,  G,  G, BW],
+        [BW,  W,  W,  W,  W,  W,  W,  W,  W,  W,  W,  G, BW],
+        [BW,  G,  G,  G,  D,  G,  W,  G,  K,  G,  W,  G, BW],
+        [BW,  K,  G,  G,  W,  G,  W,  G,  K,  G,  W,  G, BW],
+        [BW,  W,  D,  W,  W,  G,  W,  W,  W,  G,  W,  G, BW],
+        [BW,  K,  G,  G,  W,  G,  D,  G,  G,  G,  W,  G, BW],
+        [BW,  G,  G,  K,  W,  G,  W,  W,  W,  W,  W,  G, BW],
+        [BW,  W,  D,  W,  W,  G,  G,  G,  G,  G,  G,  G, BW],
+        [BW,  G,  G,  G,  W,  W,  D,  W,  W,  W,  D,  W, BW],
+        [BW,  G,  G,  K,  W,  K,  G,  G,  W,  K,  G,  K, BW],
+        [BW,  G,  G,  K,  W,  G,  G,  G,  W,  K,  K,  K, BW],
+        [BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW],
+    ],
+    [
+        [BW, BW, BW, BW, BW, BW, BW,  W, BW, BW, BW, BW, BW],
         [BW,  G,  G,  K,  S,  S,  S,  G,  G,  G,  G,  G, BW],
         [BW,  W,  W,  W,  W,  W,  W,  W,  W,  W,  W,  G, BW],
         [BW,  G,  G,  G,  D,  G,  W,  G,  K,  G,  W,  G, BW],

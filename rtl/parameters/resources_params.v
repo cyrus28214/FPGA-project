@@ -32,3 +32,5 @@ parameter RS_slime_0 = 30;
 parameter RS_slime_1 = 31;
 parameter RS_slime_2 = 32;
 parameter RS_slime_3 = 33;
+parameter RS_stair_0 = 34;
+parameter RS_stair_1 = 35;

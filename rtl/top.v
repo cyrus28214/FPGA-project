@@ -46,7 +46,8 @@ module top (
 
   //PS2
   wire key_up, key_down, key_left, key_right, key_enter;
-  wire [3:0] keys = {key_right, key_up, key_down, key_left};
+  wire [3:0] kbd = {key_right, key_up, key_down, key_left};
+  wire [3:0] kbd_out;
   PS2 u_PS2 (
       .clk(clk),
       .rstn(rstn),
@@ -57,6 +58,13 @@ module top (
       .left(key_left),
       .right(key_right),
       .enter(key_enter)
+  );
+
+  kbd_process4 u_kbd_process4 (
+      .clk    (logic_clk),
+      .rstn   (rstn),
+      .kbd    (kbd),
+      .kbd_out(kbd_out)
   );
 
   //vga
@@ -82,24 +90,12 @@ module top (
 
   //player
   //详见/docs/player_move_and_interact.drawio.png
-  wire [3:0] move;
+  wire [3:0] move = kbd_out;
 
-  genvar i;
-  generate
-    for (i = 0; i < 4; i = i + 1) begin
-      edge_to_pulse u_edge_to_pulse_i (
-          .clk (logic_clk),
-          .rstn(rstn),
-          .in  (~keys[i]),
-          .out (move[i])
-      );
-    end
-  endgenerate
-
-  // outports wire
   wire [3:0] player_x;
   wire [3:0] player_y;
   wire [3:0] key_num;
+  wire [7:0] health;
   wire [18:0] bRAM_map_addrb;
   wire [15:0] bRAM_map_doutb;
   wire bRAM_map_wrb;
@@ -112,6 +108,7 @@ module top (
       .player_x       (player_x),
       .player_y       (player_y),
       .key_num        (key_num),
+      .health         (health),
       .bRAM_map_addr  (bRAM_map_addrb),
       .bRAM_map_data  (bRAM_map_doutb),
       .bRAM_map_dwrite(bRAM_map_dwriteb),
@@ -162,7 +159,7 @@ module top (
   Sseg_Dev u_Sseg_Dev (
       .clk(clk),
       .start(div_res[20]),
-      .hexs({24'h0147AB, key_num, keys}),
+      .hexs({16'h0147, health, key_num, kbd}),
       .points(0),
       .LEs(0),
       .seg_clk(seg_clk),

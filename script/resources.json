@@ -168,5 +168,15 @@
         "name": "slime_3",
         "id": 33,
         "addr": 33792
+    },
+    {
+        "name": "stair_0",
+        "id": 34,
+        "addr": 34816
+    },
+    {
+        "name": "stair_1",
+        "id": 35,
+        "addr": 35840
     }
 ]

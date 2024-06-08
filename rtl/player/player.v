@@ -5,6 +5,7 @@ module player (
     output wire [3:0] player_x,
     output wire [3:0] player_y,
     output reg [3:0] key_num,
+    output reg [7:0] health,
     output wire [18:0] bRAM_map_addr,
     input wire [15:0] bRAM_map_data,
     output wire bRAM_map_wr,
@@ -38,6 +39,7 @@ module player (
       .player_x       (player_x),
       .player_y       (player_y),
       .key_num        (key_num),
+      .health         (health),
       .player_ask_move(ask_move),
       .player_ask_x   (ask_x),
       .player_ask_y   (ask_y),
@@ -50,14 +52,17 @@ module player (
       .accept_move(accept_move),
       .goto_x     (goto_x),
       .goto_y     (goto_y),
-      .key_num_out(key_num_out)
+      .key_num_out(key_num_out),
+      .health_out (health_out)
   );
 
   always @(posedge clk or negedge rstn) begin
     if (~rstn) begin
       key_num <= 0;
+      health  <= 10;
     end else if (accept_move) begin
       key_num <= key_num_out;
+      health  <= health_out;
     end
   end
 
