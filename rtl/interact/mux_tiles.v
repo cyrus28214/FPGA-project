@@ -28,9 +28,11 @@ module mux_tiles (
     if (is_wall) begin
       player_goto_x <= player_x;
       player_goto_y <= player_y;
+
     end else if (is_key) begin
       key_num_out <= key_num + 1;
       new_tile_id <= RS_ground_0;
+
     end else if (is_door) begin
       if (key_num == 0) begin
         player_goto_x <= player_x;
@@ -39,6 +41,7 @@ module mux_tiles (
         key_num_out <= key_num - 1;
         new_tile_id <= RS_ground_0;
       end
+
     end else if (is_monster) begin
       if (health > 3) begin
         health_out  <= health - 3;

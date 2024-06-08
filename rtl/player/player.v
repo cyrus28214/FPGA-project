@@ -13,6 +13,7 @@ module player (
 );
 
   wire [3:0] key_num_out;
+  wire [3:0] health_out;
   wire       accept_move;
   wire [3:0] ask_x;
   wire [3:0] ask_y;

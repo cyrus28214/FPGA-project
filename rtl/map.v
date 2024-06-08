@@ -1,7 +1,7 @@
 module map (
     input wire clk,
     input wire rstn,
-    input wire [15:0] map_id,
+    input wire [18:0] map_id,
 
     input wire [3:0] player_x,
     input wire [3:0] player_y,
@@ -15,6 +15,7 @@ module map (
 );
 
   `include "./parameters/game_params.v"
+  `include "./parameters/resources_params.v"
 
   wire [ 3:0] grid_x;
   wire [ 3:0] grid_y;
@@ -22,7 +23,7 @@ module map (
   wire [15:0] dst_data;
   wire        dst_wr;
   assign bRAM_map_addr = (map_id << 8) + (grid_y * MAP_WIDTH + grid_x);
-  wire tild_id = (grid_x == player_x && grid_y == player_y) ? RS_hero_0 : bRAM_map_data;
+  wire [18:0] tild_id = (grid_x == player_x && grid_y == player_y) ? RS_hero_0 : bRAM_map_data;
 
   render_map u_render_map (
       .clk     (clk),

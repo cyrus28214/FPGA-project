@@ -26,11 +26,12 @@ D = tiles["door_0"]
 K = tiles["key_0"]
 S = tiles["slime_0"]
 ST0 = tiles["stair_0"]
+ST1 = tiles["stair_1"]
 
 maps = [
     [
         [BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW],
-        [BW,ST0,  G,  K,  S,  S,  S,  G,  G,  G,  G,  G, BW],
+        [BW,ST1,  G,  K,  S,  S,  S,  G,  G,  G,  G,  G, BW],
         [BW,  W,  W,  W,  W,  W,  W,  W,  W,  W,  W,  G, BW],
         [BW,  G,  G,  G,  D,  G,  W,  G,  K,  G,  W,  G, BW],
         [BW,  K,  G,  G,  W,  G,  W,  G,  K,  G,  W,  G, BW],

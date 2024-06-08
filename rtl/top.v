@@ -70,9 +70,9 @@ module top (
   //vga
   wire [11:0] vga_rgb;
 
-  wire [18:0] w_addr;
-  wire [15:0] w_data;
-  wire        we;
+  wire [18:0] vga_mem_addr;
+  wire [15:0] vga_mem_dwrite;
+  wire        vga_mem_wr;
   vga u_vga (
       .clk    (clk),
       .rstn   (rstn),
@@ -80,9 +80,9 @@ module top (
       .vga_vs (vga_vs),
       .vga_rgb(vga_rgb),
 
-      .w_addr(w_addr),
-      .w_data(w_data),
-      .we    (we)
+      .w_addr(vga_mem_addr),
+      .w_data(vga_mem_dwrite),
+      .we    (vga_mem_wr)
   );
   assign vga_red   = vga_rgb[11:8];
   assign vga_green = vga_rgb[7:4];
@@ -117,22 +117,21 @@ module top (
 
 
   //map
-  wire [3:0] grid_x;
-  wire [3:0] grid_y;
+  wire [18:0] map_id = 0;
+  wire [15:0]             bRAM_map_douta;
+  wire [18:0]             bRAM_map_addra;
 
-  wire [15:0] bRAM_map_douta;
-  wire [18:0] bRAM_map_addra = grid_y * MAP_WIDTH + grid_x;
-  wire [15:0] tile_id = (grid_x == player_x && grid_y == player_y) ? RS_hero_0 : bRAM_map_douta;
-
-  render_map u_render_map (
-      .clk(clk),
-      .rstn(rstn),
-      .tile_id(tile_id),
-      .grid_x(grid_x),
-      .grid_y(grid_y),
-      .dst_addr(w_addr),
-      .dst_data(w_data),
-      .dst_wr(we)
+  map u_map (
+      .clk          (clk),
+      .rstn         (rstn),
+      .map_id       (map_id),
+      .player_x     (player_x),
+      .player_y     (player_y),
+      .bRAM_map_addr(bRAM_map_addra),
+      .bRAM_map_data(bRAM_map_douta),
+      .dst_addr     (vga_mem_addr),
+      .dst_data     (vga_mem_dwrite),
+      .dst_wr       (vga_mem_wr)
   );
 
   bRAM_map u_bRAM_map (
