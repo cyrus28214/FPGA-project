@@ -20,7 +20,6 @@ module top (
 
   `include "./parameters/game_params.v"
   `include "./parameters/resources_params.v"
-  `include "./player/player.v"
 
   //reset
   wire rstn = switch[0];

@@ -1,10 +1,29 @@
+import json
+
+tiles = []
+with open("./script/resources.json", "r") as f:
+    tiles = json.load(f)
+
+# [
+#     {
+#         "name": "black_0",
+#         "id": 0,
+#         "addr": 0
+#     },
+# ]
+
+#convert to {name: id}
+
+tiles = {t["name"]: t["id"] for t in tiles}
+
 MAP_WIDTH = 13
 MAP_HEIGHT = 13
 
-G = 2
-W = 3
-BW = 5
-D = 6
+G = tiles["ground_0"]
+W = tiles["wall_0"]
+BW = tiles["wall_2"]
+D = tiles["door_0"]
+K = tiles["key_0"]
 
 maps = [
     [
@@ -18,7 +37,7 @@ maps = [
         [BW,  G,  G,  G,  W,  G,  W,  W,  W,  W,  W,  G, BW],
         [BW,  W,  D,  W,  W,  G,  G,  G,  G,  G,  G,  G, BW],
         [BW,  G,  G,  G,  W,  W,  D,  W,  W,  W,  D,  W, BW],
-        [BW,  G,  G,  G,  W,  G,  G,  G,  W,  G,  G,  G, BW],
+        [BW,  G,  G,  G,  W,  K,  G,  G,  W,  G,  G,  G, BW],
         [BW,  G,  G,  G,  W,  G,  G,  G,  W,  G,  G,  G, BW],
         [BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW],
     ]

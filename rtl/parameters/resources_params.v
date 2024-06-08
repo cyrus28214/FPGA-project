@@ -24,3 +24,7 @@ parameter RS_hero_12 = 22;
 parameter RS_hero_13 = 23;
 parameter RS_hero_14 = 24;
 parameter RS_hero_15 = 25;
+parameter RS_key_0 = 26;
+parameter RS_key_1 = 27;
+parameter RS_key_2 = 28;
+parameter RS_key_3 = 29;

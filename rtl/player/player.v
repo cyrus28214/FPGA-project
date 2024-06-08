@@ -8,6 +8,8 @@ module player (
     input wire [15:0] bRAM_map_data
 );
 
+  reg [3:0] key_num;
+
   player_move u_player_move (
       .clk        (clk),
       .rstn       (rstn),
@@ -40,5 +42,11 @@ module player (
       .goto_x         (goto_x),
       .goto_y         (goto_y)
   );
+
+  always @(posedge clk or negedge rstn) begin
+    if (~rstn) begin
+      key_num <= 0;
+    end
+  end
 
 endmodule

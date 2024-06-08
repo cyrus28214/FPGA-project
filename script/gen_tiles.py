@@ -55,12 +55,14 @@ resources_dict = {
     "wall" : "/texture/wall.png",
     "door" : "/entity/door.png",
     "hero" : "/entity/hero.png",
+    "key" : "/entity/key.png"
 }
 
 def main():
     base_path = './resources'
     coe_out_path = './resources/resources.coe'
     param_out_path = './rtl/parameters/resources_params.v'
+    json_out_path = "./script/resources.json"
     
     names, images = [], []
     for name, path in resources_dict.items():
@@ -80,7 +82,10 @@ def main():
         for i, (name, addr) in enumerate(zip(names, addrs))
     ]
         
-    print(json.dumps(data_json, indent=4))
+    # print(json.dumps(data_json, indent=4))
+    with open(json_out_path, 'w') as f:
+        json.dump(data_json, f, indent=4)
+    print(f"JSON文件已生成到{json_out_path}")
     
     
     hexs_fancy = [hex_fancy(hex) for hex in hexs]

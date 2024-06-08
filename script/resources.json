@@ -1,0 +1,152 @@
+[
+    {
+        "name": "black_0",
+        "id": 0,
+        "addr": 0
+    },
+    {
+        "name": "white_0",
+        "id": 1,
+        "addr": 1024
+    },
+    {
+        "name": "ground_0",
+        "id": 2,
+        "addr": 2048
+    },
+    {
+        "name": "wall_0",
+        "id": 3,
+        "addr": 3072
+    },
+    {
+        "name": "wall_1",
+        "id": 4,
+        "addr": 4096
+    },
+    {
+        "name": "wall_2",
+        "id": 5,
+        "addr": 5120
+    },
+    {
+        "name": "door_0",
+        "id": 6,
+        "addr": 6144
+    },
+    {
+        "name": "door_1",
+        "id": 7,
+        "addr": 7168
+    },
+    {
+        "name": "door_2",
+        "id": 8,
+        "addr": 8192
+    },
+    {
+        "name": "door_3",
+        "id": 9,
+        "addr": 9216
+    },
+    {
+        "name": "hero_0",
+        "id": 10,
+        "addr": 10240
+    },
+    {
+        "name": "hero_1",
+        "id": 11,
+        "addr": 11264
+    },
+    {
+        "name": "hero_2",
+        "id": 12,
+        "addr": 12288
+    },
+    {
+        "name": "hero_3",
+        "id": 13,
+        "addr": 13312
+    },
+    {
+        "name": "hero_4",
+        "id": 14,
+        "addr": 14336
+    },
+    {
+        "name": "hero_5",
+        "id": 15,
+        "addr": 15360
+    },
+    {
+        "name": "hero_6",
+        "id": 16,
+        "addr": 16384
+    },
+    {
+        "name": "hero_7",
+        "id": 17,
+        "addr": 17408
+    },
+    {
+        "name": "hero_8",
+        "id": 18,
+        "addr": 18432
+    },
+    {
+        "name": "hero_9",
+        "id": 19,
+        "addr": 19456
+    },
+    {
+        "name": "hero_10",
+        "id": 20,
+        "addr": 20480
+    },
+    {
+        "name": "hero_11",
+        "id": 21,
+        "addr": 21504
+    },
+    {
+        "name": "hero_12",
+        "id": 22,
+        "addr": 22528
+    },
+    {
+        "name": "hero_13",
+        "id": 23,
+        "addr": 23552
+    },
+    {
+        "name": "hero_14",
+        "id": 24,
+        "addr": 24576
+    },
+    {
+        "name": "hero_15",
+        "id": 25,
+        "addr": 25600
+    },
+    {
+        "name": "key_0",
+        "id": 26,
+        "addr": 26624
+    },
+    {
+        "name": "key_1",
+        "id": 27,
+        "addr": 27648
+    },
+    {
+        "name": "key_2",
+        "id": 28,
+        "addr": 28672
+    },
+    {
+        "name": "key_3",
+        "id": 29,
+        "addr": 29696
+    }
+]
