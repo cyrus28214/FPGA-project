@@ -58,16 +58,34 @@ resources_dict = {
     "wall" : "/texture/wall.png",
     "door" : "/entity/door.png",
     "hero" : "/entity/hero.png",
-    "key" : "/entity/key.png",
-    "slime" : "/entity/slime.png",
-   "stair" : "/entity/stair.png" 
+    "stair" : "/entity/stair.png",
+
+    # items
+    "key" : "/items/key.png",
+    "gem" : "/items/gem.png",
+    "potion" : "/items/potion.png",
+    
+    # enemies
+    "slime" : "/enemies/slime.png",
+    "bat" : "/enemies/bat.png",
+    "skeleton" : "/enemies/skeleton.png",
+    "mummy" : "/enemies/mummy.png",
+    "wizard" : "/enemies/wizard.png",
 }
 
 def main():
     base_path = './resources'
+    md_out_path = './docs/resources.md'
     coe_out_path = './resources/resources.coe'
     param_out_path = './rtl/parameters/resources_params.v'
-    json_out_path = "./script/resources.json"
+    json_out_path = './script/resources.json'
+    
+    with open(md_out_path, 'w', encoding='utf-8') as f:
+        f.write("# 资源列表\n\n")
+        for name, path in resources_dict.items():
+            f.write(f"## {name}\n\n")
+            f.write(f"![{name}](../{base_path}/{path})\n\n")
+    print(f"Markdown文件已生成到{md_out_path}")
     
     names, images = [], []
     for name, path in resources_dict.items():

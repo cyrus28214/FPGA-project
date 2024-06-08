@@ -130,53 +130,273 @@
         "addr": 25600
     },
     {
-        "name": "key_0",
+        "name": "stair_0",
         "id": 26,
         "addr": 26624
     },
     {
-        "name": "key_1",
+        "name": "stair_1",
         "id": 27,
         "addr": 27648
     },
     {
-        "name": "key_2",
+        "name": "key_0",
         "id": 28,
         "addr": 28672
     },
     {
-        "name": "key_3",
+        "name": "key_1",
         "id": 29,
         "addr": 29696
     },
     {
-        "name": "slime_0",
+        "name": "key_2",
         "id": 30,
         "addr": 30720
     },
     {
-        "name": "slime_1",
+        "name": "key_3",
         "id": 31,
         "addr": 31744
     },
     {
-        "name": "slime_2",
+        "name": "gem_0",
         "id": 32,
         "addr": 32768
     },
     {
-        "name": "slime_3",
+        "name": "gem_1",
         "id": 33,
         "addr": 33792
     },
     {
-        "name": "stair_0",
+        "name": "gem_2",
         "id": 34,
         "addr": 34816
     },
     {
-        "name": "stair_1",
+        "name": "gem_3",
         "id": 35,
         "addr": 35840
+    },
+    {
+        "name": "potion_0",
+        "id": 36,
+        "addr": 36864
+    },
+    {
+        "name": "potion_1",
+        "id": 37,
+        "addr": 37888
+    },
+    {
+        "name": "potion_2",
+        "id": 38,
+        "addr": 38912
+    },
+    {
+        "name": "potion_3",
+        "id": 39,
+        "addr": 39936
+    },
+    {
+        "name": "slime_0",
+        "id": 40,
+        "addr": 40960
+    },
+    {
+        "name": "slime_1",
+        "id": 41,
+        "addr": 41984
+    },
+    {
+        "name": "slime_2",
+        "id": 42,
+        "addr": 43008
+    },
+    {
+        "name": "slime_3",
+        "id": 43,
+        "addr": 44032
+    },
+    {
+        "name": "slime_4",
+        "id": 44,
+        "addr": 45056
+    },
+    {
+        "name": "slime_5",
+        "id": 45,
+        "addr": 46080
+    },
+    {
+        "name": "slime_6",
+        "id": 46,
+        "addr": 47104
+    },
+    {
+        "name": "slime_7",
+        "id": 47,
+        "addr": 48128
+    },
+    {
+        "name": "bat_0",
+        "id": 48,
+        "addr": 49152
+    },
+    {
+        "name": "bat_1",
+        "id": 49,
+        "addr": 50176
+    },
+    {
+        "name": "bat_2",
+        "id": 50,
+        "addr": 51200
+    },
+    {
+        "name": "bat_3",
+        "id": 51,
+        "addr": 52224
+    },
+    {
+        "name": "bat_4",
+        "id": 52,
+        "addr": 53248
+    },
+    {
+        "name": "bat_5",
+        "id": 53,
+        "addr": 54272
+    },
+    {
+        "name": "bat_6",
+        "id": 54,
+        "addr": 55296
+    },
+    {
+        "name": "bat_7",
+        "id": 55,
+        "addr": 56320
+    },
+    {
+        "name": "skeleton_0",
+        "id": 56,
+        "addr": 57344
+    },
+    {
+        "name": "skeleton_1",
+        "id": 57,
+        "addr": 58368
+    },
+    {
+        "name": "skeleton_2",
+        "id": 58,
+        "addr": 59392
+    },
+    {
+        "name": "skeleton_3",
+        "id": 59,
+        "addr": 60416
+    },
+    {
+        "name": "skeleton_4",
+        "id": 60,
+        "addr": 61440
+    },
+    {
+        "name": "skeleton_5",
+        "id": 61,
+        "addr": 62464
+    },
+    {
+        "name": "skeleton_6",
+        "id": 62,
+        "addr": 63488
+    },
+    {
+        "name": "skeleton_7",
+        "id": 63,
+        "addr": 64512
+    },
+    {
+        "name": "mummy_0",
+        "id": 64,
+        "addr": 65536
+    },
+    {
+        "name": "mummy_1",
+        "id": 65,
+        "addr": 66560
+    },
+    {
+        "name": "mummy_2",
+        "id": 66,
+        "addr": 67584
+    },
+    {
+        "name": "mummy_3",
+        "id": 67,
+        "addr": 68608
+    },
+    {
+        "name": "mummy_4",
+        "id": 68,
+        "addr": 69632
+    },
+    {
+        "name": "mummy_5",
+        "id": 69,
+        "addr": 70656
+    },
+    {
+        "name": "mummy_6",
+        "id": 70,
+        "addr": 71680
+    },
+    {
+        "name": "mummy_7",
+        "id": 71,
+        "addr": 72704
+    },
+    {
+        "name": "wizard_0",
+        "id": 72,
+        "addr": 73728
+    },
+    {
+        "name": "wizard_1",
+        "id": 73,
+        "addr": 74752
+    },
+    {
+        "name": "wizard_2",
+        "id": 74,
+        "addr": 75776
+    },
+    {
+        "name": "wizard_3",
+        "id": 75,
+        "addr": 76800
+    },
+    {
+        "name": "wizard_4",
+        "id": 76,
+        "addr": 77824
+    },
+    {
+        "name": "wizard_5",
+        "id": 77,
+        "addr": 78848
+    },
+    {
+        "name": "wizard_6",
+        "id": 78,
+        "addr": 79872
+    },
+    {
+        "name": "wizard_7",
+        "id": 79,
+        "addr": 80896
     }
 ]

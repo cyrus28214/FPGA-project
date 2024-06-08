@@ -15,8 +15,10 @@ module mux_tiles (
   `include "../parameters/resources_params.v"
   wire is_wall = (RS_wall_0 <= tile_id && tile_id <= RS_wall_2);
   wire is_key = (RS_key_0 <= tile_id && tile_id <= RS_key_3);
+  wire is_potion = (RS_potion_0 <= tile_id && tile_id <= RS_potion_3);
+  wire is_gem = (RS_gem_0 <= tile_id && tile_id <= RS_gem_3);
   wire is_door = (RS_door_0 <= tile_id && tile_id <= RS_door_3);
-  wire is_monster = (RS_slime_0 <= tile_id && tile_id <= RS_slime_3);
+  wire is_monster = (RS_slime_0 <= tile_id && tile_id <= RS_wizard_7);
 
   always @(*) begin
     player_goto_x <= pos_x;
@@ -31,6 +33,10 @@ module mux_tiles (
 
     end else if (is_key) begin
       key_num_out <= key_num + 1;
+      new_tile_id <= RS_ground_0;
+
+    end else if (is_potion || is_gem) begin
+      health_out  <= health + 5;
       new_tile_id <= RS_ground_0;
 
     end else if (is_door) begin
