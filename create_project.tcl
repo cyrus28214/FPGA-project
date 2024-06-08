@@ -2,7 +2,7 @@
 
 # 使用[file normalize <相对路径>]可以将路径转换为绝对路径，这样你就可以在脚本里使用相对路径，方便其他人也能运行脚本
 
-set target_dir "./vivado"
+set target_dir "../vivado"
 set project_name "FPGA-project"
 
 # 设置最大线程数，加快vivado的速度
