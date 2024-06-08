@@ -61,14 +61,10 @@ maps = [
     ]
 ]
 
-align_size = 256
-
 for m in maps:
     for i in range(MAP_HEIGHT):
         m[i] = [f"{x:04X}" for x in m[i]]
         m[i] = ",".join(m[i])
-    padding = ",".join([f"{0:04X}"] * (align_size - len(m[i])))
-    m.append(padding)
 
 for i in range(len(maps)):
     maps[i] = ",\n".join(maps[i])

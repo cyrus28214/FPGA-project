@@ -22,7 +22,7 @@ module map (
   wire [18:0] dst_addr;
   wire [15:0] dst_data;
   wire        dst_wr;
-  assign bRAM_map_addr = (map_id << 8) + (grid_y * MAP_WIDTH + grid_x);
+  assign bRAM_map_addr = map_id * MAP_WIDTH * MAP_HEIGHT + grid_y * MAP_WIDTH + grid_x;
   wire [18:0] tild_id = (grid_x == player_x && grid_y == player_y) ? RS_hero_0 : bRAM_map_data;
 
   render_map u_render_map (
