@@ -86,6 +86,10 @@ module intetact_tb ();
     move <= 4'b0001;
     #40;
     move <= 0;
+    #400
+    move <= 4'b0001;
+    #40
+    move <= 4'b0000;
   end
 
 endmodule  //TOP

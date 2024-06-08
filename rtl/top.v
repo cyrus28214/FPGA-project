@@ -59,15 +59,20 @@ module top (
   assign vga_blue  = vga_rgb[3:0];
 
   //player
-  //参见/docs/player_move_and_interact.drawio.png
+  //�?/docs/player_move_and_interact.drawio.png
   wire [3:0] btn_pulse;
 
-  edge_to_pulse u_edge_to_pulse (
-      .clk (logic_clk),
-      .rstn(rstn),
-      .in  (btn_db),
-      .out (btn_pulse)
-  );
+  genvar i;
+  generate
+    for (i = 0; i < 4; i = i + 1) begin
+      edge_to_pulse u_edge_to_pulse_i (
+          .clk (logic_clk),
+          .rstn(rstn),
+          .in  (btn_db[i]),
+          .out (btn_pulse[i])
+      );
+    end
+  endgenerate
 
   wire       ask_move;
   wire [3:0] ask_x;
@@ -75,7 +80,7 @@ module top (
   wire [3:0] player_x;
   wire [3:0] player_y;
 
-  reg  [3:0] move;
+  wire [3:0] move = btn_pulse;
 
   player_move u_player_move (
       .clk        (logic_clk),
@@ -92,13 +97,13 @@ module top (
   );
 
   wire [18:0] bRAM_map_addrb;
-  wire [15:0] bRAM_map_datab;
+  wire [15:0] bRAM_map_doutb;
   wire        accept_move;
   wire [ 3:0] goto_x;
   wire [ 3:0] goto_y;
 
   interact u_interact (
-      .clk            (div_res[1]),
+      .clk            (logic_clk),
       .rstn           (~sys_rst),
       .player_x       (player_x),
       .player_y       (player_y),
@@ -106,7 +111,7 @@ module top (
       .player_ask_x   (ask_x),
       .player_ask_y   (ask_y),
       .bRAM_map_addr  (bRAM_map_addrb),
-      .bRAM_map_data  (bRAM_map_datab),
+      .bRAM_map_data  (bRAM_map_doutb),
       .accept_move    (accept_move),
       .goto_x         (goto_x),
       .goto_y         (goto_y)

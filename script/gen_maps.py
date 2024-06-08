@@ -1,21 +1,23 @@
-import numpy as np
+MAP_WIDTH = 13
+MAP_HEIGHT = 13
 
 G = 2
 W = 3
 BW = 5
+D = 6
 
 maps = [
     [
         [BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW],
         [BW,  G,  G,  G,  G,  G,  G,  G,  G,  G,  G,  G, BW],
         [BW,  W,  W,  W,  W,  W,  W,  W,  W,  W,  W,  G, BW],
+        [BW,  G,  G,  G,  D,  G,  W,  G,  G,  G,  W,  G, BW],
         [BW,  G,  G,  G,  W,  G,  W,  G,  G,  G,  W,  G, BW],
-        [BW,  G,  G,  G,  W,  G,  W,  G,  G,  G,  W,  G, BW],
-        [BW,  W,  W,  W,  W,  G,  W,  W,  W,  G,  W,  G, BW],
-        [BW,  G,  G,  G,  W,  G,  G,  G,  G,  G,  W,  G, BW],
+        [BW,  W,  D,  W,  W,  G,  W,  W,  W,  G,  W,  G, BW],
+        [BW,  G,  G,  G,  W,  G,  D,  G,  G,  G,  W,  G, BW],
         [BW,  G,  G,  G,  W,  G,  W,  W,  W,  W,  W,  G, BW],
-        [BW,  W,  W,  W,  W,  G,  G,  G,  G,  G,  G,  G, BW],
-        [BW,  G,  G,  G,  W,  W,  G,  W,  W,  W,  W,  W, BW],
+        [BW,  W,  D,  W,  W,  G,  G,  G,  G,  G,  G,  G, BW],
+        [BW,  G,  G,  G,  W,  W,  D,  W,  W,  W,  D,  W, BW],
         [BW,  G,  G,  G,  W,  G,  G,  G,  W,  G,  G,  G, BW],
         [BW,  G,  G,  G,  W,  G,  G,  G,  W,  G,  G,  G, BW],
         [BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW, BW],
@@ -24,23 +26,21 @@ maps = [
 
 align_size = 256
 
-maps = [np.array(m, dtype=np.int16).to_bytes() for m in maps]
+for m in maps:
+    for i in range(MAP_HEIGHT):
+        m[i] = [f"{x:04X}" for x in m[i]]
+        m[i] = ",".join(m[i])
+    padding = ",".join([f"{0:04X}"] * (align_size - len(m[i])))
+    m.append(padding)
 
-# right padding
-maps = []
-
-map1f = np.array(map1f, dtype=np.int16)
-
-bts = [','.join(
-    [f"{tile:04X}" for tile in row]
-) for row in map1f]
-data = ',\n'.join(bts)
+for i in range(len(maps)):
+    maps[i] = ",\n".join(maps[i])
 
 out_path = "./resources/map.coe"
 
 with open(out_path, "w") as f:
     f.write("memory_initialization_radix=16;\n")
     f.write("memory_initialization_vector=\n")
-    f.write(data + ";\n")
+    f.write(",\n\n".join(maps) + ";\n")
 
 print(f"地图文件已生成到{out_path}")
