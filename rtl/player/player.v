@@ -30,7 +30,7 @@ module player (
 
   interact u_interact (
       .clk            (clk),
-      .rstn           (~sys_rst),
+      .rstn           (rst),
       .player_x       (player_x),
       .player_y       (player_y),
       .player_ask_move(ask_move),
