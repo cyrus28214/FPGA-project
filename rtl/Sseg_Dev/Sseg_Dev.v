@@ -4,10 +4,10 @@ module Sseg_Dev(
     input [31:0] hexs,
     input [7:0] points,
     input [7:0] LEs,
-    output sclk,
-    output sclrn,
-    output sout,
-    output EN
+    output seg_clk,
+    output seg_clrn,
+    output seg_sout,
+    output seg_pen
 );
 
     wire [63:0] seg_data;
@@ -23,10 +23,10 @@ module Sseg_Dev(
         .clk(clk),
         .start(start),
         .par_in(seg_data),
-        .sclk(sclk),
-        .sclrn(sclrn),
-        .sout(sout),
-        .EN(EN)
+        .sclk(seg_clk),
+        .sclrn(seg_clrn),
+        .sout(seg_sout),
+        .EN(seg_pen)
     );
 
 

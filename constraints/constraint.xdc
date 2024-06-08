@@ -56,8 +56,6 @@ set_property IOSTANDARD LVCMOS33 [get_ports seg_clk]
 set_property IOSTANDARD LVCMOS33 [get_ports seg_sout]
 set_property IOSTANDARD LVCMOS33 [get_ports seg_pen]
 set_property IOSTANDARD LVCMOS33 [get_ports seg_clrn]
-set_property PACKAGE_PIN M24 [get_ports seg_clk]
-
 
 # # Audio out
 # set_property PACKAGE_PIN P26 [get_ports AUD_PWM]

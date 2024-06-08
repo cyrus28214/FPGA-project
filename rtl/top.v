@@ -2,18 +2,25 @@ module top (
     input wire clk,  // 100 MHz
     input wire [3:0] BTN_Y,  // button down is LOW
     input wire [15:0] switch,
-    input PS2_clk, PS2_data,
+    input wire PS2_clk,
+    input wire PS2_data,
     output wire [4:0] BTN_X,
     output wire vga_hs,
     output wire vga_vs,
     output wire [3:0] vga_red,
     output wire [3:0] vga_green,
     output wire [3:0] vga_blue,
-    output wire beep
+    output wire beep,
+    output wire seg_clk,
+    output wire seg_clrn,
+    output wire seg_sout,
+    output wire seg_pen
+
 );
 
   `include "./parameters/game_params.v"
   `include "./parameters/resources_params.v"
+  `include "./player/player.v"
 
   //reset
   wire rstn = switch[0];
@@ -38,6 +45,21 @@ module top (
       .pbreg (btn_db)
   );
 
+  //PS2
+  wire key_up, key_down, key_left, key_right, key_enter;
+  wire [3:0] keys = {key_right, key_up, key_down, key_left};
+  PS2 u_PS2 (
+      .clk(clk),
+      .rstn(rstn),
+      .PS2_clk(PS2_clk),
+      .PS2_data(PS2_data),
+      .up(key_up),
+      .down(key_down),
+      .left(key_left),
+      .right(key_right),
+      .enter(key_enter)
+  );
+
   //vga
   wire [11:0] vga_rgb;
 
@@ -60,8 +82,8 @@ module top (
   assign vga_blue  = vga_rgb[3:0];
 
   //player
-  //�?/docs/player_move_and_interact.drawio.png
-  wire [3:0] btn_pulse;
+  //详见/docs/player_move_and_interact.drawio.png
+  wire [3:0] move;
 
   genvar i;
   generate
@@ -69,58 +91,32 @@ module top (
       edge_to_pulse u_edge_to_pulse_i (
           .clk (logic_clk),
           .rstn(rstn),
-          .in  (btn_db[i]),
-          .out (btn_pulse[i])
+          .in  (~keys[i]),
+          .out (move[i])
       );
     end
   endgenerate
 
-  wire       ask_move;
-  wire [3:0] ask_x;
-  wire [3:0] ask_y;
-  wire [3:0] player_x;
-  wire [3:0] player_y;
-
-  wire [3:0] move = btn_pulse;
-
-  player_move u_player_move (
-      .clk        (logic_clk),
-      .rstn       (rstn),
-      .move       (move),
-      .ask_move   (ask_move),
-      .ask_x      (ask_x),
-      .ask_y      (ask_y),
-      .accept_move(accept_move),
-      .goto_x     (goto_x),
-      .goto_y     (goto_y),
-      .pos_x      (player_x),
-      .pos_y      (player_y)
-  );
-
+  // outports wire
+  wire        player_x;
+  wire        player_y;
   wire [18:0] bRAM_map_addrb;
   wire [15:0] bRAM_map_doutb;
-  wire        accept_move;
-  wire [ 3:0] goto_x;
-  wire [ 3:0] goto_y;
 
-  interact u_interact (
-      .clk            (logic_clk),
-      .rstn           (~sys_rst),
-      .player_x       (player_x),
-      .player_y       (player_y),
-      .player_ask_move(ask_move),
-      .player_ask_x   (ask_x),
-      .player_ask_y   (ask_y),
-      .bRAM_map_addr  (bRAM_map_addrb),
-      .bRAM_map_data  (bRAM_map_doutb),
-      .accept_move    (accept_move),
-      .goto_x         (goto_x),
-      .goto_y         (goto_y)
+  player u_player (
+      .clk          (clk),
+      .rstn         (rstn),
+      .move         (move),
+      .player_x     (player_x),
+      .player_y     (player_y),
+      .bRAM_map_addr(bRAM_map_addrb),
+      .bRAM_map_data(bRAM_map_doutb)
   );
 
+
   //map
-  wire [ 3:0] grid_x;
-  wire [ 3:0] grid_y;
+  wire [3:0] grid_x;
+  wire [3:0] grid_y;
 
   wire [15:0] bRAM_map_douta;
   wire [18:0] bRAM_map_addra = grid_y * MAP_WIDTH + grid_x;
@@ -157,18 +153,17 @@ module top (
   );
   assign beep = switch[1] & _beep;
 
-  //PS2
-  wire key_up, key_down, key_left, key_right, key_enter;
-  PS2 u_PS2 (
+  //7seg
+  Sseg_Dev u_Sseg_Dev (
       .clk(clk),
-      .rstn(rstn),
-      .PS2_clk(PS2_clk),
-      .PS2_data(PS2_data),
-      .up(key_up),
-      .down(key_down),
-      .left(key_left),
-      .right(key_right),
-      .enter(key_enter)
+      .start(div_res[20]),
+      .hexs(32'hDEADBEEF),
+      .points(0),
+      .LEs(0),
+      .seg_clk(seg_clk),
+      .seg_clrn(seg_clrn),
+      .seg_sout(seg_sout),
+      .seg_pen(seg_pen)
   );
 
 endmodule
