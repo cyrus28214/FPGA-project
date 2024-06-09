@@ -20,6 +20,12 @@ always @(*) begin
             up_x = 0;
             up_y = 0;
         end
+        default: begin
+            down_x = 0;
+            down_y = 0;
+            up_x = 0;
+            up_y = 0;
+        end
     endcase
 end
 endmodule

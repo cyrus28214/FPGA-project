@@ -43,9 +43,9 @@ create_clock -period 10.000 -name clk [get_ports "clk"]
 
 # # create_clock -period 10.000 -name clk [get_ports "clk_p"]
 
-# FPGA RST
-set_property PACKAGE_PIN W13 [get_ports RSTN]
-set_property IOSTANDARD LVCMOS18 [get_ports RSTN]
+# # FPGA RST
+#set_property PACKAGE_PIN W13 [get_ports RSTN]
+#set_property IOSTANDARD LVCMOS18 [get_ports RSTN]
 
  # 7SEG
 set_property PACKAGE_PIN M24 [get_ports seg_clk]

@@ -101,6 +101,7 @@ module interact (
     if (!rstn) begin
       accept_move <= 0;
       bRAM_map_wr <= 0;
+      bRAM_map_dwrite <= 0;
     end else if (state == INTERACTING) begin
       accept_move <= 1;
       bRAM_map_wr <= 1;

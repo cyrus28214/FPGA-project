@@ -141,12 +141,14 @@ module top (
       .clka (~clk),
       .addra(bRAM_map_addra),
       .douta(bRAM_map_douta),
+      .wea  (0),
+      .dina (0),
 
       .clkb (~clk),
       .addrb(bRAM_map_addrb),
+      .doutb(bRAM_map_doutb),
       .web  (bRAM_map_wrb),
-      .dinb (bRAM_map_dwriteb),
-      .doutb(bRAM_map_doutb)
+      .dinb (bRAM_map_dwriteb)
   );
 
   //music
