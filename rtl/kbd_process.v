@@ -4,7 +4,7 @@ module kbd_process (
     input wire kbd,
     output reg kbd_out
 );
-  localparam INTERVAL = 10000000;  //40ns * 10^6 = 0.04s
+  localparam INTERVAL = 5000000;
   localparam IDLE = 0;
   localparam PRESS = 1;
 

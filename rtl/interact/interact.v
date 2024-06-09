@@ -3,8 +3,9 @@ module interact (
     input wire rstn,
     input wire [3:0] player_x,
     input wire [3:0] player_y,
+    input wire [15:0] floor,
     input wire [3:0] key_num,
-    input wire [7:0] health,
+    input wire [15:0] health,
 
     input wire player_ask_move,
     input wire [3:0] player_ask_x,
@@ -16,10 +17,11 @@ module interact (
     output reg [15:0] bRAM_map_dwrite,
 
     output reg accept_move,
+    output wire [15:0] floor_out,
     output wire [3:0] goto_x,
     output wire [3:0] goto_y,
     output wire [3:0] key_num_out,
-    output wire [7:0] health_out
+    output wire [15:0] health_out
 );
 
   `include "../parameters/resources_params.v"
@@ -59,7 +61,7 @@ module interact (
     if (!rstn) begin
       bRAM_map_addr <= 0;
     end else if (state == IDLE && player_ask_move) begin
-      bRAM_map_addr <= player_ask_y * MAP_WIDTH + player_ask_x;
+      bRAM_map_addr <= floor * MAP_WIDTH * MAP_HEIGHT + player_ask_y * MAP_WIDTH + player_ask_x;
     end
   end
 
@@ -77,13 +79,17 @@ module interact (
   wire [15:0] new_tile_id;
 
   mux_tiles u_mux_tiles (
-      .tile_id      (tile_id),
-      .pos_x        (player_ask_x),
-      .pos_y        (player_ask_y),
-      .player_x     (player_x),
-      .player_y     (player_y),
-      .key_num      (key_num),
-      .health       (health),
+      .pos_x(player_ask_x),
+      .pos_y(player_ask_y),
+
+      .floor   (floor),
+      .player_x(player_x),
+      .player_y(player_y),
+      .key_num (key_num),
+      .health  (health),
+      .tile_id (tile_id),
+
+      .floor_out    (floor_out),
       .player_goto_x(goto_x),
       .player_goto_y(goto_y),
       .key_num_out  (key_num_out),
@@ -94,6 +100,7 @@ module interact (
   always @(posedge clk or negedge rstn) begin
     if (!rstn) begin
       accept_move <= 0;
+      bRAM_map_wr <= 0;
     end else if (state == INTERACTING) begin
       accept_move <= 1;
       bRAM_map_wr <= 1;

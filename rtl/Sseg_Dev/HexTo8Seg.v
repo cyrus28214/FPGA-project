@@ -64,6 +64,8 @@ module HexToSeg (
     output [7:0] segment
 );
 
+wire a,b, c, d, e, f, g, p;
+
   MyMC14495 MSEG (
       .D3(hex[3]),
       .D2(hex[2]),

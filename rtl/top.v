@@ -92,10 +92,11 @@ module top (
   //详见/docs/player_move_and_interact.drawio.png
   wire [3:0] move = kbd_out;
 
+  wire [15:0] floor;
   wire [3:0] player_x;
   wire [3:0] player_y;
   wire [3:0] key_num;
-  wire [7:0] health;
+  wire [15:0] health;
   wire [18:0] bRAM_map_addrb;
   wire [15:0] bRAM_map_doutb;
   wire bRAM_map_wrb;
@@ -105,6 +106,7 @@ module top (
       .clk            (logic_clk),
       .rstn           (rstn),
       .move           (move),
+      .floor          (floor),
       .player_x       (player_x),
       .player_y       (player_y),
       .key_num        (key_num),
@@ -117,9 +119,9 @@ module top (
 
 
   //map
-  wire [18:0] map_id = 0;
-  wire [15:0]             bRAM_map_douta;
-  wire [18:0]             bRAM_map_addra;
+  wire [18:0] map_id = floor;
+  wire [15:0]                 bRAM_map_douta;
+  wire [18:0]                 bRAM_map_addra;
 
   map u_map (
       .clk          (clk),
@@ -158,7 +160,7 @@ module top (
   Sseg_Dev u_Sseg_Dev (
       .clk(clk),
       .start(div_res[20]),
-      .hexs({16'h0147, health, key_num, kbd}),
+      .hexs({12'h014, floor[3:0], health[7:0], key_num, kbd}),
       .points(0),
       .LEs(0),
       .seg_clk(seg_clk),

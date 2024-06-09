@@ -2,16 +2,13 @@ module player_move (
     input wire clk,  //div_res[1]
     input wire rstn,
     input wire [3:0] move,
-
+    input wire [3:0] pos_x,
+    input wire [3:0] pos_y,
     output reg ask_move,
     output reg [3:0] ask_x,
     output reg [3:0] ask_y,
-    input wire accept_move,
-    input wire [3:0] goto_x,
-    input wire [3:0] goto_y,
+    input wire accept_move
 
-    output reg [3:0] pos_x,
-    output reg [3:0] pos_y
 );
 
   localparam IDLE = 0;
@@ -78,17 +75,6 @@ module player_move (
       ask_y <= new_pos_y;
     end
     // ASK_MOVE: keep ask_x and ask_y
-  end
-
-  //pos_x, pos_y
-  always @(posedge clk or negedge rstn) begin
-    if (!rstn) begin
-      pos_x <= 6;
-      pos_y <= 11;
-    end else if (state == ASK_MOVE && accept_move) begin
-      pos_x <= goto_x;
-      pos_y <= goto_y;
-    end
   end
 
 endmodule
