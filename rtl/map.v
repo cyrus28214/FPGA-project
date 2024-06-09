@@ -1,5 +1,6 @@
 module map (
     input wire clk,
+    input wire clk_swap,
     input wire rstn,
     input wire [18:0] map_id,
 
@@ -21,11 +22,18 @@ module map (
   wire [3:0] grid_y;
   assign bRAM_map_addr = map_id * MAP_WIDTH * MAP_HEIGHT + grid_y * MAP_WIDTH + grid_x;
   wire [18:0] tile_id = (grid_x == player_x && grid_y == player_y) ? RS_hero_0 : bRAM_map_data;
+  wire [15:0] tile_id_out;
+
+  animate u_animate (
+      .swap       (clk_swap),
+      .tile_id    (tile_id),
+      .tile_id_out(tile_id_out)
+  );
 
   render_map u_render_map (
       .clk     (clk),
       .rstn    (rstn),
-      .tile_id (tile_id),
+      .tile_id (tile_id_out),
       .grid_x  (grid_x),
       .grid_y  (grid_y),
       .dst_addr(dst_addr),

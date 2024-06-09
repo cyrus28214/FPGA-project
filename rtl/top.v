@@ -125,6 +125,7 @@ module top (
 
   map u_map (
       .clk          (clk),
+      .clk_swap     (div_res[24]),
       .rstn         (rstn),
       .map_id       (map_id),
       .player_x     (player_x),
