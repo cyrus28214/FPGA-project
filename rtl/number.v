@@ -59,6 +59,7 @@ module number(
             3: digit_id <= digit_key_1;
             4: digit_id <= digit_key_2;
             5: digit_id <= digit_key_3;
+            default: digit_id <= 0;
         endcase
     end
 
