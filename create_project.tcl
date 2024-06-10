@@ -46,6 +46,15 @@ set_property -dict [list \
   CONFIG.Load_Init_File {true} \
 ] [get_ips bROM_tile]
 
+create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name bROM_num
+set_property -dict [list \
+  CONFIG.Coe_File [file normalize ./resources/number.coe] \
+  CONFIG.Component_Name {bROM_num} \
+  CONFIG.Load_Init_File {true} \
+  CONFIG.Memory_Type {Single_Port_ROM} \
+  CONFIG.Write_Depth_A {2160} \
+] [get_ips bROM_num]
+
 # create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name bROM_win
 # set_property -dict [list \
 #   CONFIG.Enable_A {Always_Enabled} \

@@ -67,6 +67,7 @@ module top (
       .kbd_out(kbd_out)
   );
 
+
   //vga
   wire [11:0] vga_rgb;
 
@@ -118,6 +119,28 @@ module top (
   );
 
 
+  // map 和 number 分频
+
+  wire [18:0] vga_mem_addr_a;
+  wire [15:0] vga_mem_dwrite_a;
+  wire        vga_mem_wr_a;  
+  wire [18:0] vga_mem_addr_b;
+  wire [15:0] vga_mem_dwrite_b;
+  wire        vga_mem_wr_b;
+  vga_switch u_vga_switch (
+    .clk(clk),
+    .rstn(rstn),
+    .addr_a(vga_mem_addr_a),
+    .dwrite_a(vga_mem_dwrite_a),
+    .wr_a(vga_mem_wr_a),
+    .addr_b(vga_mem_addr_b),
+    .dwrite_b(vga_mem_dwrite_b),
+    .wr_b(vga_mem_wr_b),
+    .addr(vga_mem_addr),
+    .dwrite(vga_mem_dwrite),
+    .wr(vga_mem_wr)
+  );
+
   //map
   wire [18:0] map_id = floor;
   wire [15:0]                 bRAM_map_douta;
@@ -132,9 +155,9 @@ module top (
       .player_y     (player_y),
       .bRAM_map_addr(bRAM_map_addra),
       .bRAM_map_data(bRAM_map_douta),
-      .dst_addr     (vga_mem_addr),
-      .dst_data     (vga_mem_dwrite),
-      .dst_wr       (vga_mem_wr)
+      .dst_addr     (vga_mem_addr_a),
+      .dst_data     (vga_mem_dwrite_a),
+      .dst_wr       (vga_mem_wr_a)
   );
 
   bRAM_map u_bRAM_map (
@@ -149,6 +172,17 @@ module top (
       .doutb(bRAM_map_doutb),
       .web  (bRAM_map_wrb),
       .dinb (bRAM_map_dwriteb)
+  );
+
+  number u_number (
+    .clk(clk),
+    .rstn(rstn),
+    .floor(floor),
+    .health(health),
+    .key_num(key_num),
+    .dst_addr(vga_mem_addr_b),
+    .dst_data(vga_mem_dwrite_b),
+    .dst_wr(vga_mem_wr_b)
   );
 
   //music

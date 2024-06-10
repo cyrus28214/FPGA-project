@@ -1,7 +1,7 @@
 module render_digit( // need at least 2^2 * 12 * 18 cycles to render a number
     input wire clk, // 100MHz
     input rstn,
-    input wire [11:0] number_addr, 
+    input wire [11:0] digit_addr, 
     input wire [9:0] top,
     input wire [9:0] left,
 
@@ -19,9 +19,9 @@ module render_digit( // need at least 2^2 * 12 * 18 cycles to render a number
         .div_res(cnt)
     );
 
-    wire [11:0] src_addr = number_addr + cnt[9:2];
+    wire [11:0] src_addr = digit_addr + cnt[9:2];
     wire [15:0] color;
-    bROM_number bROM_number_inst (
+    bROM_num bROM_num_inst (
         .clka (~clk),
         .addra(src_addr),
         .douta(color)

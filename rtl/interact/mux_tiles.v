@@ -54,10 +54,10 @@ module mux_tiles (
 
     end else if (is_key) begin
       case (tile_id) 
-        RS_door_0: key_num_out <= key_num + 1;
-        RS_door_1: key_num_out <= key_num + (1 << KEYNUM_WIDTH);
-        RS_door_2: key_num_out <= key_num + (1 << (2 * KEYNUM_WIDTH));
-        RS_door_3: key_num_out <= key_num + (1 << (3 * KEYNUM_WIDTH));
+        RS_key_0: key_num_out <= key_num + 1;
+        RS_key_1: key_num_out <= key_num + (1 << KEYNUM_WIDTH);
+        RS_key_2: key_num_out <= key_num + (1 << (2 * KEYNUM_WIDTH));
+        RS_key_3: key_num_out <= key_num + (1 << (3 * KEYNUM_WIDTH));
       endcase
       new_tile_id <= RS_ground_0;
 
@@ -66,15 +66,16 @@ module mux_tiles (
       new_tile_id <= RS_ground_0;
 
     end else if (is_door) begin
-      if ((key_num >> ((tile_id - RS_door_0) * KEYNUM_WIDTH)) & 32'hFF == 0) begin
+      if ( (tile_id == RS_door_0 && key_num[7:0] == 0) || (tile_id == RS_door_1 && key_num[15:8] == 0)
+           || (tile_id == RS_door_2 && key_num[23:16] == 0) || (tile_id == RS_door_3 && key_num[31:24] == 0) ) begin
         player_goto_x <= player_x;
         player_goto_y <= player_y;
       end else begin
         case (tile_id) 
           RS_door_0: key_num_out <= key_num - 1;
-          RS_door_1: key_num_out <= key_num - (1 << KEYNUM_WIDTH);
-          RS_door_2: key_num_out <= key_num - (1 << (2 * KEYNUM_WIDTH));
-          RS_door_3: key_num_out <= key_num - (1 << (3 * KEYNUM_WIDTH));
+          RS_door_1: key_num_out <= key_num - 256; // 2 ^ 8
+          RS_door_2: key_num_out <= key_num - 65536; // 2 ^ 16
+          RS_door_3: key_num_out <= key_num - 16777216; // 2 ^ 24
         endcase
         new_tile_id <= RS_ground_0;
       end
