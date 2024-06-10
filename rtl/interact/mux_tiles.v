@@ -23,7 +23,7 @@ module mux_tiles (
   wire is_potion = (RS_potion_0 <= tile_id && tile_id <= RS_potion_3);
   wire is_gem = (RS_gem_0 <= tile_id && tile_id <= RS_gem_3);
   wire is_door = (RS_door_0 <= tile_id && tile_id <= RS_door_3);
-  wire is_monster = (RS_slime_0 <= tile_id && tile_id <= RS_knight_7);
+  wire is_enemy = (RS_slime_0 <= tile_id && tile_id <= RS_knight_7);
   wire is_downstair = tile_id == RS_stair_0;
   wire is_upstair = tile_id == RS_stair_1;
 
@@ -45,6 +45,12 @@ module mux_tiles (
       .down_y(down_y),
       .up_x  (up_x),
       .up_y  (up_y)
+  );
+
+  wire [7:0] attack;
+  enemy_attack u_enemy_attack (
+      .tile_id(tile_id),
+      .attack (attack)
   );
 
   always @(*) begin
@@ -112,9 +118,9 @@ module mux_tiles (
         end
       endcase
 
-    end else if (is_monster) begin
-      if (health > 3) begin
-        health_out  <= health - 3;
+    end else if (is_enemy) begin
+      if (health > attack) begin
+        health_out  <= health - attack;
         new_tile_id <= RS_ground_0;
       end else begin
         player_goto_x <= player_x;
