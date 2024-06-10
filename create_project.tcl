@@ -46,13 +46,23 @@ set_property -dict [list \
   CONFIG.Load_Init_File {true} \
 ] [get_ips bROM_tile]
 
+# create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name bROM_win
+# set_property -dict [list \
+#   CONFIG.Enable_A {Always_Enabled} \
+#   CONFIG.Memory_Type {Single_Port_ROM} \
+#   CONFIG.Write_Depth_A {76800} \
+#   CONFIG.Coe_File [file normalize ./resources/win.png.coe] \
+#   CONFIG.Load_Init_File {true} \
+# ] [get_ips bROM_win]
+
 # True Dual Port RAM
 # 读延迟：两个时钟周期，第一拍设置addr，第三拍才能获得输出。
 # 写延迟：一个时钟周期。
+# 307200 = 640 * 480
 create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name bRAM
 set_property -dict [list \
   CONFIG.Write_Width_A {16} \
-  CONFIG.Write_Depth_A {524288} \
+  CONFIG.Write_Depth_A {307200} \
   CONFIG.Enable_A {Always_Enabled} \
   CONFIG.Enable_B {Always_Enabled} \
   CONFIG.Memory_Type {True_Dual_Port_RAM} \
@@ -63,7 +73,7 @@ set_property -dict [list \
 create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name bRAM_map
 set_property -dict [list \
   CONFIG.Write_Width_A {16} \
-  CONFIG.Write_Depth_A {131072} \
+  CONFIG.Write_Depth_A {16384} \
   CONFIG.Enable_A {Always_Enabled} \
   CONFIG.Enable_B {Always_Enabled} \
   CONFIG.Memory_Type {True_Dual_Port_RAM} \
