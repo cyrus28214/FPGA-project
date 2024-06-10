@@ -4,8 +4,8 @@ module number(
     input wire [15:0] floor,
     input wire [15:0] health,
     input wire [31:0] key_num,
-    output wire dst_addr,
-    output wire dst_data,
+    output wire [18:0] dst_addr,
+    output wire [15:0] dst_data,
     output wire dst_wr
 );
 
@@ -13,7 +13,6 @@ module number(
     reg [3:0] digit_id;
     wire [3:0] digit_floor, digit_health, digit_key_0,
                digit_key_1, digit_key_2, digit_key_3;
-
 
     get_digit #(.LEN(16))
     u_get_digit_floor (

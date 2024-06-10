@@ -2,7 +2,7 @@ module render_number ( // need at least 2^2 * 12 * 18 * 21 cycs
     input wire clk,
     input wire rstn,
 
-    input wire [11:0] digit_id,
+    input wire [3:0] digit_id,
     output reg [3:0] grid_x,
     output reg [3:0] grid_y,
 
@@ -10,6 +10,12 @@ module render_number ( // need at least 2^2 * 12 * 18 * 21 cycs
     output wire [15:0] dst_data,
     output wire dst_wr
 );
+    initial begin
+        grid_x = 0;
+        grid_y = 0;
+    end
+
+
     `include "./parameters/number_params.v"
 
 
@@ -23,9 +29,9 @@ module render_number ( // need at least 2^2 * 12 * 18 * 21 cycs
         .div_res(cnt)
     );
 
-    wire [18:0] number_addr = digit_id * 216;
+    wire [18:0] digit_addr = digit_id * 216;
     wire [ 9:0] top = grid_y == 0 ? 86 : (102 + grid_y * 32);
-    wire [ 9:0] left = grid_y == 0 ? 58 : (34 + grid_x * 16);
+    wire [ 9:0] left = grid_y == 0 ? 58 : (50 + grid_x * 16);
     render_digit u_render_digit (
         .clk(clk),
         .rstn(rstn),

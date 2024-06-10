@@ -1,6 +1,7 @@
 module vga_switch(
     input wire clk,
     input wire rstn,
+    input wire tog,
     input wire [18:0] addr_a,
     input wire [15:0] dwrite_a,
     input wire wr_a,
@@ -17,12 +18,12 @@ module vga_switch(
         .DIV(20)
     ) u_clkdiv (
         .clk(clk),
-        .rstn(rstn & cnt < 710368), // 4 * 12 * 18 * 21 + 2^13 * 13 * 13
+        .rstn(rstn), // 4 * 12 * 18 * 21 + 2^13 * 13 * 13
         .div_res(cnt)
     );
 
     always @(posedge clk) begin
-        if( cnt >= 18144 ) begin
+        if( tog && cnt >= 181440 ) begin
             addr <= addr_a;
             dwrite <= dwrite_a;
             wr <= wr_a;

@@ -24,7 +24,8 @@ module render_digit( // need at least 2^2 * 12 * 18 cycles to render a number
     bROM_num bROM_num_inst (
         .clka (~clk),
         .addra(src_addr),
-        .douta(color)
+        .douta(color),
+        .ena(1)
     );
 
     wire [9:0] pos_x = left + cnt[9:2] % 12;

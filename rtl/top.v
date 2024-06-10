@@ -130,6 +130,7 @@ module top (
   vga_switch u_vga_switch (
     .clk(clk),
     .rstn(rstn),
+    .tog(BTN_Y[0]),
     .addr_a(vga_mem_addr_a),
     .dwrite_a(vga_mem_dwrite_a),
     .wr_a(vga_mem_wr_a),

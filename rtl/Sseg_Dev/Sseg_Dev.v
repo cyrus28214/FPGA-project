@@ -12,14 +12,14 @@ module Sseg_Dev(
 
     wire [63:0] seg_data;
 
-    HexTo8Seg (
+    HexTo8Seg u_HexTo8Seg(
         .hexs(hexs),
         .points(points),
         .LEs(LEs),
         .seg_data(seg_data)
     );
 
-    P2S #(.BIT_WIDTH(64)) (
+    P2S #(.BIT_WIDTH(64)) u_P2S(
         .clk(clk),
         .start(start),
         .par_in(seg_data),
