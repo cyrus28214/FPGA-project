@@ -12,21 +12,10 @@ module render_map (
 );
 
   `include "./parameters/game_params.v"
-
-
-  wire [12:0] cnt;
-  wire map_clk = cnt[12];
-  clkdiv #(
-      .DIV(13)
-  ) u_clkdiv (
-      .clk    (clk),
-      .rstn   (rstn),
-      .div_res(cnt)
-  );
-
+  reg [12:0] cnt;
   wire [18:0] tile_addr = tile_id << 10;
-  wire [ 9:0] top = (grid_y << 5) + 32;
-  wire [ 9:0] left = (grid_x << 5) + 32 * 4;
+  wire [9:0] top = (grid_y << 5) + 32;
+  wire [9:0] left = (grid_x << 5) + 32 * 4;
   render_tile u_render_tile (
       .clk      (clk),
       .rstn     (rstn),
@@ -53,13 +42,17 @@ module render_map (
     end
   end
 
-  always @(posedge map_clk or negedge rstn) begin
+  always @(posedge clk or negedge rstn) begin
     if (!rstn) begin
+      cnt <= 0;
       grid_x <= 0;
       grid_y <= 0;
     end else begin
-      grid_x <= grid_x_next;
-      grid_y <= grid_y_next;
+      cnt <= cnt + 1;
+      if (&cnt) begin
+        grid_x <= grid_x_next;
+        grid_y <= grid_y_next;
+      end
     end
   end
 

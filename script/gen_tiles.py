@@ -71,7 +71,7 @@ resources_dict = {
     "skeleton" : "/enemies/skeleton.png",
     "mummy" : "/enemies/mummy.png",
     "wizard" : "/enemies/wizard.png",
-    "knight" : "/enemies/knight.png"
+    "knight" : "/enemies/knight.png",
 }
 
 def main():
