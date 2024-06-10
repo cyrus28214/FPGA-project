@@ -34,7 +34,7 @@ def parse_midi(file_path):
     return notes
 
 # 替换 'your_midi_file.mid' 为你的 MIDI 文件路径
-midi_file_path = input("file name:")
+midi_file_path = "./resources/music/bgm.mid"
 notes_durations = parse_midi(midi_file_path)
 p = 0
 
