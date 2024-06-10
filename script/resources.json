@@ -398,5 +398,45 @@
         "name": "wizard_7",
         "id": 79,
         "addr": 80896
+    },
+    {
+        "name": "knight_0",
+        "id": 80,
+        "addr": 81920
+    },
+    {
+        "name": "knight_1",
+        "id": 81,
+        "addr": 82944
+    },
+    {
+        "name": "knight_2",
+        "id": 82,
+        "addr": 83968
+    },
+    {
+        "name": "knight_3",
+        "id": 83,
+        "addr": 84992
+    },
+    {
+        "name": "knight_4",
+        "id": 84,
+        "addr": 86016
+    },
+    {
+        "name": "knight_5",
+        "id": 85,
+        "addr": 87040
+    },
+    {
+        "name": "knight_6",
+        "id": 86,
+        "addr": 88064
+    },
+    {
+        "name": "knight_7",
+        "id": 87,
+        "addr": 89088
     }
 ]

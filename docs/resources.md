@@ -60,3 +60,7 @@
 
 ![wizard](.././resources//enemies/wizard.png)
 
+## knight
+
+![knight](.././resources//enemies/knight.png)
+
