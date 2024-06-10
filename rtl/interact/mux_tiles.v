@@ -32,6 +32,13 @@ module mux_tiles (
   wire [3:0] up_x;
   wire [3:0] up_y;
 
+  wire [7:0] key_num_0, key_num_1, key_num_2, key_num_3;
+  assign {key_num_3, key_num_2, key_num_1, key_num_0} = key_num;
+  `define key_num_out_0 key_num_out[ 7: 0]
+  `define key_num_out_1 key_num_out[15: 8]
+  `define key_num_out_2 key_num_out[23:16]
+  `define key_num_out_3 key_num_out[31:24]
+
   floor_pos u_floor_pos (
       .floor (floor),
       .down_x(down_x),
@@ -53,11 +60,11 @@ module mux_tiles (
       player_goto_y <= player_y;
 
     end else if (is_key) begin
-      case (tile_id) 
-        RS_door_0: key_num_out <= key_num + 1;
-        RS_door_1: key_num_out <= key_num + (1 << KEYNUM_WIDTH);
-        RS_door_2: key_num_out <= key_num + (1 << (2 * KEYNUM_WIDTH));
-        RS_door_3: key_num_out <= key_num + (1 << (3 * KEYNUM_WIDTH));
+      case (tile_id)
+        RS_key_0: `key_num_out_0 <= key_num_0 + 1;
+        RS_key_1: `key_num_out_1 <= key_num_1 + 1;
+        RS_key_2: `key_num_out_2 <= key_num_2 + 1;
+        RS_key_3: `key_num_out_3 <= key_num_3 + 1;
       endcase
       new_tile_id <= RS_ground_0;
 
@@ -66,18 +73,44 @@ module mux_tiles (
       new_tile_id <= RS_ground_0;
 
     end else if (is_door) begin
-      if ((key_num >> ((tile_id - RS_door_0) * KEYNUM_WIDTH)) & 32'hFF == 0) begin
-        player_goto_x <= player_x;
-        player_goto_y <= player_y;
-      end else begin
-        case (tile_id) 
-          RS_door_0: key_num_out <= key_num - 1;
-          RS_door_1: key_num_out <= key_num - (1 << KEYNUM_WIDTH);
-          RS_door_2: key_num_out <= key_num - (1 << (2 * KEYNUM_WIDTH));
-          RS_door_3: key_num_out <= key_num - (1 << (3 * KEYNUM_WIDTH));
-        endcase
-        new_tile_id <= RS_ground_0;
-      end
+      case (tile_id)
+
+        RS_door_0:
+        if (key_num_0 > 0) begin
+          `key_num_out_0 <= key_num_0 - 1;
+          new_tile_id <= RS_ground_0;
+        end else begin
+          player_goto_x <= player_x;
+          player_goto_y <= player_y;
+        end
+
+        RS_door_1:
+        if (key_num_1 > 0) begin
+          `key_num_out_1 <= key_num_1 - 1;
+          new_tile_id <= RS_ground_0;
+        end else begin
+          player_goto_x <= player_x;
+          player_goto_y <= player_y;
+        end
+
+        RS_door_2:
+        if (key_num_2 > 0) begin
+          `key_num_out_2 <= key_num_2 - 1;
+          new_tile_id <= RS_ground_0;
+        end else begin
+          player_goto_x <= player_x;
+          player_goto_y <= player_y;
+        end
+
+        RS_door_3:
+        if (key_num_3 > 0) begin
+          `key_num_out_3 <= key_num_3 - 1;
+          new_tile_id <= RS_ground_0;
+        end else begin
+          player_goto_x <= player_x;
+          player_goto_y <= player_y;
+        end
+      endcase
 
     end else if (is_monster) begin
       if (health > 3) begin
