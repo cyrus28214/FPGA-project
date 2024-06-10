@@ -7,7 +7,7 @@ param_out_path = "./rtl/floor_pos.v"
 
 MAP_WIDTH = 13
 MAP_HEIGHT = 13
-sheets = ["1f", "2f"]
+sheets = ["1f", "2f", "End"]
 
 tiles = []
 with open("./script/resources.json", "r") as f:
