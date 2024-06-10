@@ -5,24 +5,25 @@ module mux_tiles (
     input wire [15:0] floor,
     input wire [ 3:0] player_x,
     input wire [ 3:0] player_y,
-    input wire [ 3:0] key_num,
+    input wire [31:0] key_num,
     input wire [15:0] health,
     input wire [15:0] tile_id,
 
     output reg [15:0] floor_out,
     output reg [ 3:0] player_goto_x,
     output reg [ 3:0] player_goto_y,
-    output reg [ 3:0] key_num_out,
+    output reg [31:0] key_num_out,
     output reg [15:0] health_out,
     output reg [15:0] new_tile_id
 );
   `include "../parameters/resources_params.v"
+  `include "../parameters/number_params.v"
   wire is_wall = (RS_wall_0 <= tile_id && tile_id <= RS_wall_2);
   wire is_key = (RS_key_0 <= tile_id && tile_id <= RS_key_3);
   wire is_potion = (RS_potion_0 <= tile_id && tile_id <= RS_potion_3);
   wire is_gem = (RS_gem_0 <= tile_id && tile_id <= RS_gem_3);
   wire is_door = (RS_door_0 <= tile_id && tile_id <= RS_door_3);
-  wire is_monster = (RS_slime_0 <= tile_id && tile_id <= RS_wizard_7);
+  wire is_monster = (RS_slime_0 <= tile_id && tile_id <= RS_knight_7);
   wire is_downstair = tile_id == RS_stair_0;
   wire is_upstair = tile_id == RS_stair_1;
 
@@ -52,7 +53,12 @@ module mux_tiles (
       player_goto_y <= player_y;
 
     end else if (is_key) begin
-      key_num_out <= key_num + 1;
+      case (tile_id) 
+        RS_door_0: key_num_out <= key_num + 1;
+        RS_door_1: key_num_out <= key_num + (1 << KEYNUM_WIDTH);
+        RS_door_2: key_num_out <= key_num + (1 << (2 * KEYNUM_WIDTH));
+        RS_door_3: key_num_out <= key_num + (1 << (3 * KEYNUM_WIDTH));
+      endcase
       new_tile_id <= RS_ground_0;
 
     end else if (is_potion || is_gem) begin
@@ -60,11 +66,16 @@ module mux_tiles (
       new_tile_id <= RS_ground_0;
 
     end else if (is_door) begin
-      if (key_num == 0) begin
+      if ((key_num >> ((tile_id - RS_key_0) * KEYNUM_WIDTH)) & 32'hFF == 0) begin
         player_goto_x <= player_x;
         player_goto_y <= player_y;
       end else begin
-        key_num_out <= key_num - 1;
+        case (tile_id) 
+          RS_key_0: key_num_out <= key_num - 1;
+          RS_key_1: key_num_out <= key_num - (1 << KEYNUM_WIDTH);
+          RS_key_2: key_num_out <= key_num - (1 << (2 * KEYNUM_WIDTH));
+          RS_key_3: key_num_out <= key_num - (1 << (3 * KEYNUM_WIDTH));
+        endcase
         new_tile_id <= RS_ground_0;
       end
 

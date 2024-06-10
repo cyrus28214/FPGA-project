@@ -11,8 +11,8 @@ always @(*) begin
         0: begin
             down_x = 0;
             down_y = 0;
-            up_x = 2;
-            up_y = 11;
+            up_x = 1;
+            up_y = 2;
         end
         1: begin
             down_x = 2;

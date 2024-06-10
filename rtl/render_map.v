@@ -25,8 +25,8 @@ module render_map (
   );
 
   wire [18:0] tile_addr = tile_id << 10;
-  wire [ 9:0] top = grid_y << 5;
-  wire [ 9:0] left = grid_x << 5;
+  wire [ 9:0] top = (grid_y << 5) + 32;
+  wire [ 9:0] left = (grid_x << 5) + 32 * 4;
   render_tile u_render_tile (
       .clk      (clk),
       .rstn     (rstn),

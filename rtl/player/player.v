@@ -1,10 +1,10 @@
 module player (
     input wire clk,  //div_res[1]
     input wire rstn,
-    input wire [3:0] move,
-    output reg [3:0] player_x,
-    output reg [3:0] player_y,
-    output reg [3:0] key_num,
+    input wire [ 3:0] move,
+    output reg [ 3:0] player_x,
+    output reg [ 3:0] player_y,
+    output reg [31:0] key_num,
     output reg [15:0] health,
     output reg [15:0] floor,
     output wire [18:0] bRAM_map_addr,
@@ -22,7 +22,7 @@ module player (
   wire [ 3:0] goto_y;
 
   wire [15:0] floor_out;
-  wire [ 3:0] key_num_out;
+  wire [31:0] key_num_out;
   wire [15:0] health_out;
 
   player_move u_player_move (

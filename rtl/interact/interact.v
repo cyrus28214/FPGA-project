@@ -4,7 +4,7 @@ module interact (
     input wire [3:0] player_x,
     input wire [3:0] player_y,
     input wire [15:0] floor,
-    input wire [3:0] key_num,
+    input wire [31:0] key_num,
     input wire [15:0] health,
 
     input wire player_ask_move,
@@ -20,7 +20,7 @@ module interact (
     output wire [15:0] floor_out,
     output wire [3:0] goto_x,
     output wire [3:0] goto_y,
-    output wire [3:0] key_num_out,
+    output wire [31:0] key_num_out,
     output wire [15:0] health_out
 );
 

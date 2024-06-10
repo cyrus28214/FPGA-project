@@ -95,7 +95,7 @@ module top (
   wire [15:0] floor;
   wire [3:0] player_x;
   wire [3:0] player_y;
-  wire [3:0] key_num;
+  wire [31:0] key_num;
   wire [15:0] health;
   wire [18:0] bRAM_map_addrb;
   wire [15:0] bRAM_map_doutb;
@@ -124,7 +124,7 @@ module top (
   wire [18:0]                 bRAM_map_addra;
 
   map u_map (
-      .clk          (clk),
+      .clk          (logic_clk),
       .clk_swap     (div_res[24]),
       .rstn         (rstn),
       .map_id       (map_id),
@@ -163,7 +163,7 @@ module top (
   Sseg_Dev u_Sseg_Dev (
       .clk(clk),
       .start(div_res[20]),
-      .hexs({12'h014, floor[3:0], health[7:0], key_num, kbd}),
+      .hexs({floor[3:0], health[7:0], key_num[27:24], key_num[19:16], key_num[11:8], key_num[3:0], kbd}),
       .points(0),
       .LEs(0),
       .seg_clk(seg_clk),

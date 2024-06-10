@@ -5,7 +5,7 @@ module animate (
 );
   `include "./parameters/resources_params.v"
 
-  wire is_animate = (tile_id >= RS_slime_0 && tile_id <= RS_wizard_7);
+  wire is_animate = (tile_id >= RS_slime_0 && tile_id <= RS_knight_7);
 
   always @* begin
     if (is_animate && swap) tile_id_out <= tile_id + 1;
