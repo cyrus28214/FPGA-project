@@ -115,7 +115,9 @@ module top (
       .bRAM_map_addr  (bRAM_map_addrb),
       .bRAM_map_data  (bRAM_map_doutb),
       .bRAM_map_dwrite(bRAM_map_dwriteb),
-      .bRAM_map_wr    (bRAM_map_wrb)
+      .bRAM_map_wr    (bRAM_map_wrb),
+
+      .BTN_Y(BTN_Y)
   );
 
 
@@ -130,7 +132,6 @@ module top (
   vga_switch u_vga_switch (
     .clk(clk),
     .rstn(rstn),
-    .tog(BTN_Y[0]),
     .addr_a(vga_mem_addr_a),
     .dwrite_a(vga_mem_dwrite_a),
     .wr_a(vga_mem_wr_a),
@@ -139,7 +140,9 @@ module top (
     .wr_b(vga_mem_wr_b),
     .addr(vga_mem_addr),
     .dwrite(vga_mem_dwrite),
-    .wr(vga_mem_wr)
+    .wr(vga_mem_wr),
+
+    .BTN_Y(BTN_Y)
   );
 
   //map

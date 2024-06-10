@@ -1,7 +1,6 @@
 module vga_switch(
     input wire clk,
     input wire rstn,
-    input wire tog,
     input wire [18:0] addr_a,
     input wire [15:0] dwrite_a,
     input wire wr_a,
@@ -10,7 +9,9 @@ module vga_switch(
     input wire wr_b,
     output reg [18:0] addr,
     output reg [15:0] dwrite,
-    output reg wr
+    output reg wr,
+
+    input wire [3:0] BTN_Y
 );
 
     wire [19:0] cnt;
@@ -23,7 +24,7 @@ module vga_switch(
     );
 
     always @(posedge clk) begin
-        if( tog && cnt >= 181440 ) begin
+        if( BTN_Y[0] & cnt >= 181440 ) begin
             addr <= addr_a;
             dwrite <= dwrite_a;
             wr <= wr_a;

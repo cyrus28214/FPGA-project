@@ -10,7 +10,9 @@ module player (
     output wire [18:0] bRAM_map_addr,
     input wire [15:0] bRAM_map_data,
     output wire bRAM_map_wr,
-    output wire [15:0] bRAM_map_dwrite
+    output wire [15:0] bRAM_map_dwrite,
+
+    input wire [3:0] BTN_Y
 );
 
   wire        ask_move;
@@ -75,7 +77,9 @@ module player (
       floor <= floor_out;
       key_num <= key_num_out;
       health <= health_out;
-    end
+    end else if( !BTN_Y[1] ) health <= health + 1;
+    else if( !BTN_Y[2] ) key_num <= key_num + 32'h01010101;
   end
+
 
 endmodule

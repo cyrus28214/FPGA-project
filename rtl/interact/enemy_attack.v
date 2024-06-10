@@ -1,5 +1,5 @@
 module enemy_attack (
-    input wire tile_id,
+    input wire [15:0] tile_id,
     output reg [15:0] attack
 );
   `include "../parameters/resources_params.v"
