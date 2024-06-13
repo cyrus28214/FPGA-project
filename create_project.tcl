@@ -48,21 +48,12 @@ set_property -dict [list \
 
 create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name bROM_num
 set_property -dict [list \
-  CONFIG.Coe_File [file normalize ./resources/number.coe] \
-  CONFIG.Component_Name {bROM_num} \
-  CONFIG.Load_Init_File {true} \
+  CONFIG.Enable_A {Always_Enabled} \
   CONFIG.Memory_Type {Single_Port_ROM} \
-  CONFIG.Write_Depth_A {2160} \
+  CONFIG.Write_Depth_A {4096} \
+  CONFIG.Coe_File [file normalize ./resources/number.coe] \
+  CONFIG.Load_Init_File {true} \
 ] [get_ips bROM_num]
-
-# create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name bROM_win
-# set_property -dict [list \
-#   CONFIG.Enable_A {Always_Enabled} \
-#   CONFIG.Memory_Type {Single_Port_ROM} \
-#   CONFIG.Write_Depth_A {76800} \
-#   CONFIG.Coe_File [file normalize ./resources/win.png.coe] \
-#   CONFIG.Load_Init_File {true} \
-# ] [get_ips bROM_win]
 
 # True Dual Port RAM
 # 读延迟：两个时钟周期，第一拍设置addr，第三拍才能获得输出。
