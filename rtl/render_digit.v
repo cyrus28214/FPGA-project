@@ -24,8 +24,7 @@ module render_digit( // need at least 2^2 * 12 * 18 cycles to render a number
     bROM_num bROM_num_inst (
         .clka (~clk),
         .addra(src_addr),
-        .douta(color),
-        .ena(1)
+        .douta(color)
     );
 
     wire [9:0] pos_x = left + cnt[9:2] % 12;
@@ -33,7 +32,7 @@ module render_digit( // need at least 2^2 * 12 * 18 cycles to render a number
     wire [18:0] addr;
     wire [15:0] data;
     wire wr;
-    render_pixel render_pixel_inst (
+    render_pixel render_pixel_inst ( // 传入 pos, color, 传出屏幕中位置、颜色、写使能
         .pos_x(pos_x),
         .pos_y(pos_y),
         .color(color),
