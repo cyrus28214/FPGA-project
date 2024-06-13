@@ -29,13 +29,12 @@ module render_number ( // need at least 2^2 * 12 * 18 * 21 cycs
         .div_res(cnt)
     );
 
-    wire [18:0] digit_addr = digit_id * 216;
     wire [ 9:0] top = grid_y == 0 ? 86 : (102 + grid_y * 32);
     wire [ 9:0] left = grid_y == 0 ? 58 : (50 + grid_x * 16);
     render_digit u_render_digit (
         .clk(clk),
         .rstn(rstn),
-        .digit_addr(digit_addr),
+        .digit(digit_id),
         .top(top),
         .left(left),
         .dst_addr(dst_addr),

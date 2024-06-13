@@ -1,7 +1,7 @@
-module render_digit( // need at least 2^2 * 12 * 18 cycles to render a number
-    input wire clk, // 100MHz
+module render_digit (  // need at least 2^2 * 12 * 18 cycles to render a number
+    input wire clk,  // 100MHz
     input rstn,
-    input wire [11:0] digit_addr, 
+    input wire [3:0] digit,
     input wire [9:0] top,
     input wire [9:0] left,
 
@@ -10,39 +10,27 @@ module render_digit( // need at least 2^2 * 12 * 18 cycles to render a number
     output wire dst_wr
 );
 
-    wire [9:0] cnt;
-    clkdiv #(
-        .DIV(10)
-    ) u_clkdiv (
-        .clk (clk),
-        .rstn (rstn && cnt < 864), // 4 * 12 * 18
-        .div_res(cnt)
-    );
+  wire [18:0] src_addr;
+  wire [15:0] src_data;
+  bROM_num bROM_tile_num (
+      .clka (~clk),
+      .addra((digit * 12 * 18) + src_addr),
+      .douta(src_data)
+  );
 
-    wire [11:0] src_addr = digit_addr + cnt[9:2];
-    wire [15:0] color;
-    bROM_num bROM_num_inst (
-        .clka (~clk),
-        .addra(src_addr),
-        .douta(color)
-    );
-
-    wire [9:0] pos_x = left + cnt[9:2] % 12;
-    wire [9:0] pos_y = top + cnt[9:2] / 12;
-    wire [18:0] addr;
-    wire [15:0] data;
-    wire wr;
-    render_pixel render_pixel_inst ( // 传入 pos, color, 传出屏幕中位置、颜色、写使能
-        .pos_x(pos_x),
-        .pos_y(pos_y),
-        .color(color),
-        .dst_addr(addr),
-        .dst_data(data),
-        .dst_wr(wr)
-    );
-
-    assign dst_addr = addr;
-    assign dst_data = data;
-    assign dst_wr = cnt[1:0] == 2'b11 && wr;
+  render_image #(
+      .W(12),
+      .H(18)
+  ) u_render_image (
+      .clk     (clk),
+      .rstn    (rstn),
+      .top     (top),
+      .left    (left),
+      .src_addr(src_addr),
+      .src_data(src_data),
+      .dst_addr(dst_addr),
+      .dst_data(dst_data),
+      .dst_wr  (dst_wr)
+  );
 
 endmodule

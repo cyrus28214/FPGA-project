@@ -1,7 +1,7 @@
 module render_tile_tb;
   reg         clk = 0;
   reg         rstn = 0;
-  reg  [18:0] tile_addr = 5;
+  reg  [18:0] tile_id = 5;
   reg  [ 9:0] top = 2;
   reg  [ 9:0] left = 3;
 
@@ -11,14 +11,14 @@ module render_tile_tb;
   wire        dst_wr;
 
   render_tile dut (
-      .clk      (clk),
-      .rstn     (rstn),
-      .tile_addr(tile_addr),
-      .top      (top),
-      .left     (left),
-      .dst_addr (dst_addr),
-      .dst_data (dst_data),
-      .dst_wr   (dst_wr)
+      .clk     (clk),
+      .rstn    (rstn),
+      .tile_id (tile_id),
+      .top     (top),
+      .left    (left),
+      .dst_addr(dst_addr),
+      .dst_data(dst_data),
+      .dst_wr  (dst_wr)
   );
 
   always #5 clk = ~clk;
