@@ -2,6 +2,10 @@
 
 FPGA 魔塔小游戏——浙江大学《数字逻辑设计》期末大作业
 
+[演示视频](https://www.bilibili.com/video/BV1i9gkeAEEk/)
+
+![demo](/docs/demo.png)
+
 ## Usage
 
 使用 tcl 来创建和更新工程，使用方法：
