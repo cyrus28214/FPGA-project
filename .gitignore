@@ -8,3 +8,5 @@
 *.coe
 *.tmp
 /report/*.pdf
+/*.bit
+/*.zip
