@@ -1,4 +1,4 @@
-module vga_switch(
+module vga_switch (
     input wire clk,
     input wire rstn,
     input wire [18:0] addr_a,
@@ -14,25 +14,32 @@ module vga_switch(
     input wire [3:0] BTN_Y
 );
 
-    wire [19:0] cnt;
-    clkdiv #(
-        .DIV(20)
-    ) u_clkdiv (
-        .clk(clk),
-        .rstn(rstn), // 4 * 12 * 18 * 21 + 2^13 * 13 * 13
-        .div_res(cnt)
-    );
+  reg [19:0] cnt;
+  reg sel;
 
-    always @(posedge clk) begin
-        if( BTN_Y[0] & cnt >= 181440 ) begin
-            addr <= addr_a;
-            dwrite <= dwrite_a;
-            wr <= wr_a;
-        end else begin
-            addr <= addr_b;
-            dwrite <= dwrite_b;
-            wr <= wr_b;
-        end
-    end    
+  always @(posedge clk or negedge rstn) begin
+    if (!rstn) begin
+      cnt <= 0;
+      sel <= 0;
+    end else begin
+      cnt <= cnt + 1;
+      if (&cnt) begin
+        sel <= ~sel;
+      end
+    end
+  end
+
+  always @* begin
+    if (sel) begin
+      addr = addr_b;
+      dwrite = dwrite_b;
+      wr = wr_b;
+    end else begin
+      addr = addr_a;
+      dwrite = dwrite_a;
+      wr = wr_a;
+    end
+  end
+
 
 endmodule

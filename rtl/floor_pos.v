@@ -17,12 +17,24 @@ always @(*) begin
         1: begin
             down_x = 2;
             down_y = 1;
-            up_x = 6;
-            up_y = 6;
+            up_x = 2;
+            up_y = 11;
         end
         2: begin
             down_x = 1;
             down_y = 10;
+            up_x = 11;
+            up_y = 10;
+        end
+        3: begin
+            down_x = 11;
+            down_y = 10;
+            up_x = 6;
+            up_y = 6;
+        end
+        4: begin
+            down_x = 6;
+            down_y = 2;
             up_x = 0;
             up_y = 0;
         end

@@ -47,7 +47,7 @@ module mux_tiles (
       .up_y  (up_y)
   );
 
-  wire [7:0] attack;
+  wire [15:0] attack;
   enemy_attack u_enemy_attack (
       .tile_id(tile_id),
       .attack (attack)
