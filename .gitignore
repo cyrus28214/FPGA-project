@@ -7,3 +7,4 @@
 # /.vscode
 *.coe
 *.tmp
+/report/*.pdf
